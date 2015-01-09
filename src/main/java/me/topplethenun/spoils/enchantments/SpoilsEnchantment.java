@@ -26,4 +26,23 @@ public class SpoilsEnchantment {
         return maximumLevel;
     }
 
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (!(o instanceof SpoilsEnchantment)) return false;
+
+        SpoilsEnchantment that = (SpoilsEnchantment) o;
+
+        return maximumLevel == that.maximumLevel &&
+                minimumLevel == that.minimumLevel &&
+                !(enchantment != null ? !enchantment.equals(that.enchantment) : that.enchantment != null);
+    }
+
+    @Override
+    public int hashCode() {
+        int result = enchantment != null ? enchantment.hashCode() : 0;
+        result = 31 * result + minimumLevel;
+        result = 31 * result + maximumLevel;
+        return result;
+    }
 }
