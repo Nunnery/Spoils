@@ -14,6 +14,9 @@
  */
 package me.topplethenun.spoils;
 
+import me.topplethenun.spoils.configuration.MasterConfiguration;
+import me.topplethenun.spoils.configuration.VersionedSmartConfiguration.VersionUpdateType;
+import me.topplethenun.spoils.configuration.VersionedSmartYamlConfiguration;
 import me.topplethenun.spoils.io.Debugger;
 import me.topplethenun.spoils.tiers.StandardTierTrait;
 import me.topplethenun.spoils.tiers.TierTrait;
@@ -21,11 +24,13 @@ import me.topplethenun.spoils.tiers.TierTraitRegistry;
 import org.bukkit.plugin.java.JavaPlugin;
 
 import java.io.File;
+import java.util.logging.Level;
 
 public class SpoilsPlugin extends JavaPlugin {
 
     private TierTraitRegistry tierTraitRegistry;
     private Debugger debugger;
+    private MasterConfiguration settings;
 
     @Override
     public void onEnable() {
@@ -35,15 +40,35 @@ public class SpoilsPlugin extends JavaPlugin {
             tierTraitRegistry.register(trait);
         }
 
-        debugger.debug("Enabling v" + getDescription().getVersion());
+        settings = new MasterConfiguration();
+        VersionedSmartYamlConfiguration configuration = new VersionedSmartYamlConfiguration
+                (new File(getDataFolder(), "config.yml"), getResource("config.yml"),
+                        VersionUpdateType.BACKUP_AND_UPDATE);
+        configuration.update();
+        settings.load(configuration);
+        configuration = new VersionedSmartYamlConfiguration(new File(getDataFolder(), "tiers.yml"),
+                getResource("tiers.yml"), VersionUpdateType.BACKUP_AND_UPDATE);
+        configuration.update();
+
+        debug("Enabling v" + getDescription().getVersion());
     }
 
     @Override
     public void onDisable() {
-        debugger.debug("Disabling v" + getDescription().getVersion());
+        debug("Disabling v" + getDescription().getVersion());
         for (TierTrait trait : tierTraitRegistry.getRegisteredTraits()) {
             tierTraitRegistry.unregister(trait);
         }
+    }
+
+    public void debug(Level level, String... messages) {
+        if (settings.getBoolean("config.debug")) {
+            debugger.debug(level, messages);
+        }
+    }
+
+    public void debug(String... messages) {
+        debug(Level.INFO, messages);
     }
 
     public TierTraitRegistry getTierTraitRegistry() {
@@ -52,5 +77,9 @@ public class SpoilsPlugin extends JavaPlugin {
 
     public Debugger getDebugger() {
         return debugger;
+    }
+
+    public MasterConfiguration getSettings() {
+        return settings;
     }
 }
