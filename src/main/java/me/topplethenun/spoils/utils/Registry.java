@@ -21,6 +21,10 @@ public class Registry<T> {
         return this;
     }
 
+    public boolean contains(T item) {
+        return registeredSet.contains(item);
+    }
+
     public Set<T> getRegisteredItems() {
         return new HashSet<>(registeredSet);
     }
