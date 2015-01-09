@@ -14,25 +14,33 @@
  */
 package me.topplethenun.spoils;
 
+import me.topplethenun.spoils.io.Debugger;
 import me.topplethenun.spoils.tiers.StandardTierTrait;
 import me.topplethenun.spoils.tiers.TierTrait;
 import me.topplethenun.spoils.tiers.TierTraitRegistry;
 import org.bukkit.plugin.java.JavaPlugin;
 
+import java.io.File;
+
 public class SpoilsPlugin extends JavaPlugin {
 
     private TierTraitRegistry tierTraitRegistry;
+    private Debugger debugger;
 
     @Override
     public void onEnable() {
+        debugger = new Debugger(new File(getDataFolder(), "debug.log"));
         tierTraitRegistry = new TierTraitRegistry();
         for (TierTrait trait : StandardTierTrait.values()) {
             tierTraitRegistry.register(trait);
         }
+
+        debugger.debug("Enabling v" + getDescription().getVersion());
     }
 
     @Override
     public void onDisable() {
+        debugger.debug("Disabling v" + getDescription().getVersion());
         for (TierTrait trait : tierTraitRegistry.getRegisteredTraits()) {
             tierTraitRegistry.unregister(trait);
         }
@@ -40,5 +48,9 @@ public class SpoilsPlugin extends JavaPlugin {
 
     public TierTraitRegistry getTierTraitRegistry() {
         return tierTraitRegistry;
+    }
+
+    public Debugger getDebugger() {
+        return debugger;
     }
 }
