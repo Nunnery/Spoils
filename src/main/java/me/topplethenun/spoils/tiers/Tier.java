@@ -14,6 +14,7 @@
  */
 package me.topplethenun.spoils.tiers;
 
+import com.google.common.reflect.TypeToken;
 import org.apache.commons.lang.Validate;
 
 import java.util.HashMap;
@@ -42,8 +43,10 @@ public class Tier {
         Validate.notNull(trait, "trait cannot be null");
         Validate.notNull(value, "value cannot be null");
         Class traitValueClazz = trait.valueClass();
+        TypeToken traitTypeToken = TypeToken.of(traitValueClazz);
         Class valueClazz = value.getClass();
-        if (!valueClazz.equals(traitValueClazz)) {
+        TypeToken valueTypeToken = TypeToken.of(valueClazz);
+        if (!traitTypeToken.isAssignableFrom(valueTypeToken) && !valueTypeToken.isAssignableFrom(valueTypeToken)) {
             throw new IllegalArgumentException("value is not of the right class type");
         }
         traitValueMap.put(trait, value);
