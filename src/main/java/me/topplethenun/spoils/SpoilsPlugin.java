@@ -14,18 +14,31 @@
  */
 package me.topplethenun.spoils;
 
+import me.topplethenun.spoils.tiers.StandardTierTrait;
+import me.topplethenun.spoils.tiers.TierTrait;
+import me.topplethenun.spoils.tiers.TierTraitRegistry;
 import org.bukkit.plugin.java.JavaPlugin;
 
 public class SpoilsPlugin extends JavaPlugin {
 
+    private TierTraitRegistry tierTraitRegistry;
+
     @Override
     public void onEnable() {
-
+        tierTraitRegistry = new TierTraitRegistry();
+        for (TierTrait trait : StandardTierTrait.values()) {
+            tierTraitRegistry.register(trait);
+        }
     }
 
     @Override
     public void onDisable() {
-
+        for (TierTrait trait : tierTraitRegistry.getRegisteredTraits()) {
+            tierTraitRegistry.unregister(trait);
+        }
     }
 
+    public TierTraitRegistry getTierTraitRegistry() {
+        return tierTraitRegistry;
+    }
 }
