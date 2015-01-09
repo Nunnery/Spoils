@@ -1,0 +1,18 @@
+# mockup of future tiers.yml
+version: "0.0.1"
+common:
+  display-name: "Common"
+  display-color: WHITE
+  identification-color: WHITE
+  base-lore:
+  - "<gold>More basic than a <white>white <gold>girl"
+  bonus-lore:
+  - "I hate it when people tickle my feet."
+  bonus-lore-minimum: 0
+  bonus-lore-maximum: 1
+  base-enchantments:
+  - DAMAGE_ALL:1:1
+  bonus-enchantments:
+  - LOOT_BONUS_MOBS:1:2
+  bonus-enchantments-minimum: 0
+  bonus-enchantments-maximum: 1
