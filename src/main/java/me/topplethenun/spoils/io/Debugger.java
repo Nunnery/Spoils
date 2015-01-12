@@ -49,7 +49,8 @@ public class Debugger {
             FileWriter fw = new FileWriter(saveTo.getPath(), true);
             PrintWriter pw = new PrintWriter(fw);
             for (String message : messages) {
-                pw.println("[" + level.getName() + "] " + Calendar.getInstance().getTime().toString() + " | " + message);
+                pw.println(
+                        "[" + level.getName() + "] " + Calendar.getInstance().getTime().toString() + " | " + message);
             }
             pw.flush();
             pw.close();

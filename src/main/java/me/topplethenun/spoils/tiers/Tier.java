@@ -62,18 +62,22 @@ public class Tier {
     }
 
     @Override
+    public int hashCode() {
+        return name != null ? name.hashCode() : 0;
+    }
+
+    @Override
     public boolean equals(Object o) {
-        if (this == o) return true;
-        if (!(o instanceof Tier)) return false;
+        if (this == o) {
+            return true;
+        }
+        if (!(o instanceof Tier)) {
+            return false;
+        }
 
         Tier tier = (Tier) o;
 
         return !(name != null ? !name.equals(tier.name) : tier.name != null);
-    }
-
-    @Override
-    public int hashCode() {
-        return name != null ? name.hashCode() : 0;
     }
 
 }

@@ -43,19 +43,6 @@ public class VersionedSmartYamlConfiguration extends SmartYamlConfiguration impl
 
     /**
      * Instantiates a new VersionedIvoryYamlConfiguration with a selected {@link java.io.File} to load/save from/to, a
-     * {@link java.io.InputStream} to check against, and an {@link VersionedSmartConfiguration.VersionUpdateType}.
-     *
-     * @param file         file to load/save from/to
-     * @param checkAgainst resource to check against
-     * @param updateType   type of updating
-     */
-    public VersionedSmartYamlConfiguration(File file, InputStream checkAgainst,
-                                           VersionUpdateType updateType) {
-        this(file, '.', checkAgainst, updateType);
-    }
-
-    /**
-     * Instantiates a new VersionedIvoryYamlConfiguration with a selected {@link java.io.File} to load/save from/to, a
      * {@link java.io.File} to check against, and an {@link VersionedSmartConfiguration.VersionUpdateType}.
      *
      * @param file         file to load/save from/to
@@ -70,6 +57,19 @@ public class VersionedSmartYamlConfiguration extends SmartYamlConfiguration impl
             this.checkAgainst = new SmartYamlConfiguration(checkAgainst);
         }
         this.updateType = updateType;
+    }
+
+    /**
+     * Instantiates a new VersionedIvoryYamlConfiguration with a selected {@link java.io.File} to load/save from/to, a
+     * {@link java.io.InputStream} to check against, and an {@link VersionedSmartConfiguration.VersionUpdateType}.
+     *
+     * @param file         file to load/save from/to
+     * @param checkAgainst resource to check against
+     * @param updateType   type of updating
+     */
+    public VersionedSmartYamlConfiguration(File file, InputStream checkAgainst,
+                                           VersionUpdateType updateType) {
+        this(file, '.', checkAgainst, updateType);
     }
 
     /**

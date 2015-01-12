@@ -43,15 +43,6 @@ public final class TextUtils {
         // do nothing
     }
 
-    public static String color(String pString) {
-        Validate.notNull(pString, "pString cannot be null");
-        String s = pString;
-        for (Map.Entry<String, ChatColor> entry : COLOR_MAP.entrySet()) {
-            s = StringUtils.replace(s, entry.getKey(), entry.getValue() + "");
-        }
-        return s;
-    }
-
     public static List<String> color(List<String> pList) {
         Validate.notNull(pList, "pList cannot be null");
         List<String> list = new ArrayList<>();
@@ -61,11 +52,11 @@ public final class TextUtils {
         return list;
     }
 
-    public static String args(String pString, Map<String, String> placeholders) {
+    public static String color(String pString) {
         Validate.notNull(pString, "pString cannot be null");
         String s = pString;
-        for (Map.Entry<String, String> entry : placeholders.entrySet()) {
-            s = StringUtils.replace(s, entry.getKey(), entry.getValue());
+        for (Map.Entry<String, ChatColor> entry : COLOR_MAP.entrySet()) {
+            s = StringUtils.replace(s, entry.getKey(), entry.getValue() + "");
         }
         return s;
     }
@@ -77,6 +68,15 @@ public final class TextUtils {
             list.add(args(s, placeholders));
         }
         return list;
+    }
+
+    public static String args(String pString, Map<String, String> placeholders) {
+        Validate.notNull(pString, "pString cannot be null");
+        String s = pString;
+        for (Map.Entry<String, String> entry : placeholders.entrySet()) {
+            s = StringUtils.replace(s, entry.getKey(), entry.getValue());
+        }
+        return s;
     }
 
 }

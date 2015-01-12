@@ -33,6 +33,14 @@ public class SpoilsPlugin extends JavaPlugin {
     private MasterConfiguration settings;
 
     @Override
+    public void onDisable() {
+        debug("Disabling v" + getDescription().getVersion());
+        for (TierTrait trait : tierTraitRegistry.getRegisteredTraits()) {
+            tierTraitRegistry.unregister(trait);
+        }
+    }
+
+    @Override
     public void onEnable() {
         debugger = new Debugger(new File(getDataFolder(), "debug.log"));
         tierTraitRegistry = new TierTraitRegistry();
@@ -43,32 +51,25 @@ public class SpoilsPlugin extends JavaPlugin {
         settings = new MasterConfiguration();
         VersionedSmartYamlConfiguration configuration = new VersionedSmartYamlConfiguration
                 (new File(getDataFolder(), "config.yml"), getResource("config.yml"),
-                        VersionUpdateType.BACKUP_AND_UPDATE);
+                 VersionUpdateType.BACKUP_AND_UPDATE);
         configuration.update();
         settings.load(configuration);
         configuration = new VersionedSmartYamlConfiguration(new File(getDataFolder(), "tiers.yml"),
-                getResource("tiers.yml"), VersionUpdateType.BACKUP_AND_UPDATE);
+                                                            getResource("tiers.yml"),
+                                                            VersionUpdateType.BACKUP_AND_UPDATE);
         configuration.update();
 
         debug("Enabling v" + getDescription().getVersion());
     }
 
-    @Override
-    public void onDisable() {
-        debug("Disabling v" + getDescription().getVersion());
-        for (TierTrait trait : tierTraitRegistry.getRegisteredTraits()) {
-            tierTraitRegistry.unregister(trait);
-        }
+    public void debug(String... messages) {
+        debug(Level.INFO, messages);
     }
 
     public void debug(Level level, String... messages) {
         if (settings.getBoolean("config.debug")) {
             debugger.debug(level, messages);
         }
-    }
-
-    public void debug(String... messages) {
-        debug(Level.INFO, messages);
     }
 
     public TierTraitRegistry getTierTraitRegistry() {

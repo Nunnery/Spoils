@@ -42,7 +42,7 @@ public class HiltEnchantStorage extends HiltItemStack {
         if (getItemMeta() instanceof EnchantmentStorageMeta) {
             if (((EnchantmentStorageMeta) getItemMeta()).hasStoredEnchants()) {
                 for (Map.Entry<Enchantment, Integer> entry : new HashSet<>(((EnchantmentStorageMeta) getItemMeta())
-                        .getStoredEnchants().entrySet())) {
+                                                                                   .getStoredEnchants().entrySet())) {
                     ((EnchantmentStorageMeta) getItemMeta()).removeStoredEnchant(entry.getKey());
                 }
             }
