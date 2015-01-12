@@ -14,7 +14,6 @@
  */
 package me.topplethenun.spoils.loaders;
 
-import me.topplethenun.spoils.SpoilsPlugin;
 import me.topplethenun.spoils.tiers.Tier;
 import me.topplethenun.spoils.tiers.TierTrait;
 import org.apache.commons.lang.Validate;
