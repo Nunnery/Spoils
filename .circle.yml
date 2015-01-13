@@ -1,0 +1,13 @@
+dependencies:
+  override:
+    - gradle publish
+
+general:
+  artifacts:
+    - "spoils-common/build/libs"
+    - "spoils-core/build/libs"
+    - "spoils-api/build/libs"
+
+test:
+  override:
+    - gradle test
