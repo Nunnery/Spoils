@@ -1,4 +1,4 @@
 /.idea
-Spoils.iml
+*.iml
 /build
 /.gradle
