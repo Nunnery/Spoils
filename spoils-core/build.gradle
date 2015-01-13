@@ -53,10 +53,3 @@ publishing {
         }
     }
 }
-
-shadowJar {
-    includes {
-        project(":spoils-common")
-        project(":spoils-api")
-    }
-}
