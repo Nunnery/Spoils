@@ -1,47 +1,8 @@
-import org.apache.tools.ant.filters.ReplaceTokens
+subprojects {
+    apply plugin: "java"
+    apply plugin: "maven-publish"
 
-plugins {
-    id "java"
-    id "maven-publish"
-    id "com.github.hierynomus.license" version "0.11.0"
-}
-
-group = "me.topplethenun"
-version = "0.0.1-SNAPSHOT"
-
-sourceCompatibility = 1.7
-
-processResources {
-    filter ReplaceTokens, tokens: [
-            VERSION: version + "-" + (System.getenv("CIRCLECI") != null ? "circleci" : "compiled") + "-" + (System.getenv("CIRCLE_BUILD_NUM") ?: "0"),
-            NAME   : project.name
-    ]
-}
-
-license {
-    header file('HEADER')
-    ignoreFailures false
-    strictCheck true
-    mapping {
-        java = 'SLASHSTAR_STYLE'
-    }
-}
-
-publishing {
-    publications {
-        java(MavenPublication) {
-            artifactId = "spoils"
-            from components.java
-        }
-    }
     repositories {
-        maven {
-            url "http://repo-topplethenun.rhcloud.com/nexus/content/repositories/${project.version.endsWith('-SNAPSHOT') ? 'snapshots' : 'releases'}/"
-            name "nunnerycode-repo"
-            credentials {
-                username System.getenv("nexusUsername") ?: nexusUsername
-                password System.getenv("nexusPassword") ?: nexusPassword
-            }
-        }
+        mavenCentral()
     }
 }

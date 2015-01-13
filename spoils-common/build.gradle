@@ -1,5 +1,3 @@
-import org.apache.tools.ant.filters.ReplaceTokens
-
 plugins {
     id "com.github.hierynomus.license" version "0.11.0"
 }
@@ -9,17 +7,17 @@ version = "0.0.1-SNAPSHOT"
 
 sourceCompatibility = 1.7
 
+repositories {
+    maven {
+        url "https://hub.spigotmc.org/nexus/content/groups/public/"
+    }
+}
+
 dependencies {
-    compile project(":spoils-common")
+    compile("org.spigotmc:spigot-api:1.8-R0.1-SNAPSHOT") {
+        exclude group: "net.md-5"
+    }
 }
-
-processResources {
-    filter ReplaceTokens, tokens: [
-            VERSION: version + "-" + (System.getenv("CIRCLECI") != null ? "circleci" : "compiled") + "-" + (System.getenv("CIRCLE_BUILD_NUM") ?: "0"),
-            NAME   : project.name
-    ]
-}
-
 
 license {
     header file('HEADER')
@@ -33,7 +31,7 @@ license {
 publishing {
     publications {
         java(MavenPublication) {
-            artifactId = "spoils-api"
+            artifactId = "spoils-common"
             from components.java
         }
     }

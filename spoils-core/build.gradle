@@ -2,6 +2,7 @@ import org.apache.tools.ant.filters.ReplaceTokens
 
 plugins {
     id "com.github.hierynomus.license" version "0.11.0"
+    id "com.github.johnrengelman.shadow" version "1.2.0"
 }
 
 group = "me.topplethenun"
@@ -11,6 +12,7 @@ sourceCompatibility = 1.7
 
 dependencies {
     compile project(":spoils-common")
+    compile project(":spoils-api")
 }
 
 processResources {
@@ -20,6 +22,9 @@ processResources {
     ]
 }
 
+artifacts {
+    archives shadowJar
+}
 
 license {
     header file('HEADER')
@@ -32,9 +37,9 @@ license {
 
 publishing {
     publications {
-        java(MavenPublication) {
-            artifactId = "spoils-api"
-            from components.java
+        shadow(MavenPublication) {
+            artifactId = "spoils-core"
+            from components.shadow
         }
     }
     repositories {
@@ -46,5 +51,12 @@ publishing {
                 password System.getenv("nexusPassword") ?: nexusPassword
             }
         }
+    }
+}
+
+shadowJar {
+    includes {
+        project(":spoils-common")
+        project(":spoils-api")
     }
 }
