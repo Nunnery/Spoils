@@ -14,6 +14,8 @@
  */
 package me.topplethenun.spoils.tiers;
 
+import me.topplethenun.spoils.api.tiers.TierTrait;
+import me.topplethenun.spoils.api.tiers.TierTraitRegistry;
 import org.apache.commons.lang.Validate;
 
 import java.util.HashMap;
@@ -21,14 +23,15 @@ import java.util.HashSet;
 import java.util.Map;
 import java.util.Set;
 
-public class TierTraitRegistry {
+public class TierTraitRegistryImpl implements TierTraitRegistry {
 
     private final Map<String, TierTrait> registeredTraits;
 
-    public TierTraitRegistry() {
+    public TierTraitRegistryImpl() {
         registeredTraits = new HashMap<>();
     }
 
+    @Override
     public void register(TierTrait trait) {
         Validate.notNull(trait, "trait cannot be null");
         if (registeredTraits.containsKey(trait.key().toLowerCase())) {
@@ -37,6 +40,7 @@ public class TierTraitRegistry {
         registeredTraits.put(trait.key().toLowerCase(), trait);
     }
 
+    @Override
     public void unregister(TierTrait trait) {
         Validate.notNull(trait, "trait cannot be null");
         if (!registeredTraits.containsKey(trait.key().toLowerCase())) {
@@ -45,11 +49,13 @@ public class TierTraitRegistry {
         registeredTraits.remove(trait.key().toLowerCase());
     }
 
+    @Override
     public boolean isRegistered(TierTrait trait) {
         Validate.notNull(trait, "trait cannot be null");
         return registeredTraits.containsKey(trait.key());
     }
 
+    @Override
     public Set<TierTrait> getRegisteredTraits() {
         return new HashSet<>(registeredTraits.values());
     }

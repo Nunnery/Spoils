@@ -14,8 +14,10 @@
  */
 package me.topplethenun.spoils.loaders;
 
-import me.topplethenun.spoils.tiers.Tier;
-import me.topplethenun.spoils.tiers.TierTrait;
+import me.topplethenun.spoils.api.loaders.TierLoader;
+import me.topplethenun.spoils.api.tiers.Tier;
+import me.topplethenun.spoils.api.tiers.TierTrait;
+import me.topplethenun.spoils.tiers.TierImpl;
 import org.apache.commons.lang.Validate;
 import org.bukkit.ChatColor;
 import org.bukkit.configuration.ConfigurationSection;
@@ -24,12 +26,12 @@ import org.bukkit.configuration.file.YamlConfiguration;
 import java.util.HashSet;
 import java.util.Set;
 
-public class TierLoader implements Loader<Set<Tier>> {
+public class TierLoaderImpl implements TierLoader {
 
     private final YamlConfiguration configuration;
     private final Set<TierTrait> traits;
 
-    public TierLoader(YamlConfiguration configuration, Set<TierTrait> traits) {
+    public TierLoaderImpl(YamlConfiguration configuration, Set<TierTrait> traits) {
         this.configuration = configuration;
         this.traits = traits;
     }
@@ -44,7 +46,7 @@ public class TierLoader implements Loader<Set<Tier>> {
                 continue;
             }
             ConfigurationSection cs = configuration.getConfigurationSection(key);
-            Tier tier = new Tier(key);
+            TierImpl tier = new TierImpl(key);
             for (TierTrait trait : traits) {
                 Object value = trait.valueClass().equals(ChatColor.class) ? ChatColor.valueOf(cs.getString(trait.key()))
                         : cs.get(trait.key(), trait.defaultValue());

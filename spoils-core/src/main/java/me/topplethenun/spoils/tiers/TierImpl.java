@@ -15,18 +15,20 @@
 package me.topplethenun.spoils.tiers;
 
 import com.google.common.reflect.TypeToken;
+import me.topplethenun.spoils.api.tiers.Tier;
+import me.topplethenun.spoils.api.tiers.TierTrait;
 import org.apache.commons.lang.Validate;
 
 import java.util.HashMap;
 import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
 
-public class Tier {
+public class TierImpl implements Tier {
 
     private final String name;
     private final Map<TierTrait, Object> traitValueMap;
 
-    public Tier(String name) {
+    public TierImpl(String name) {
         this.name = name;
         this.traitValueMap = new ConcurrentHashMap<>();
     }
@@ -71,11 +73,11 @@ public class Tier {
         if (this == o) {
             return true;
         }
-        if (!(o instanceof Tier)) {
+        if (!(o instanceof TierImpl)) {
             return false;
         }
 
-        Tier tier = (Tier) o;
+        TierImpl tier = (TierImpl) o;
 
         return !(name != null ? !name.equals(tier.name) : tier.name != null);
     }

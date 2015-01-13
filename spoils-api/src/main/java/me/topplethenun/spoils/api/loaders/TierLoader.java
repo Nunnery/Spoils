@@ -12,33 +12,13 @@
  * ACTION OF CONTRACT, NEGLIGENCE OR OTHER TORTIOUS ACTION, ARISING OUT OF OR IN CONNECTION WITH THE USE OR PERFORMANCE OF
  * THIS SOFTWARE.
  */
-package me.topplethenun.spoils.api.tiers;
+package me.topplethenun.spoils.api.loaders;
+
+import me.topplethenun.spoils.api.tiers.Tier;
+import me.topplethenun.spoils.common.loaders.Loader;
 
 import java.util.Set;
 
-public interface TierTraitRegistry {
-    /**
-     * Register a TierTrait if it is not already registered.
-     * @param trait TierTrait to register
-     */
-    void register(TierTrait trait);
+public interface TierLoader extends Loader<Set<Tier>> {
 
-    /**
-     * Unregister a TierTrait if it is already registered.
-     * @param trait TierTrait to unregister
-     */
-    void unregister(TierTrait trait);
-
-    /**
-     * Checks and returns if the given TierTrait is registered.
-     * @param trait TierTrait to check
-     * @return if TierTrait is registered
-     */
-    boolean isRegistered(TierTrait trait);
-
-    /**
-     * Gets and returns a Set of all registered TierTraits.
-     * @return Set of all registered TierTraits
-     */
-    Set<TierTrait> getRegisteredTraits();
 }

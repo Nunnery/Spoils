@@ -14,19 +14,20 @@
  */
 package me.topplethenun.spoils;
 
-import me.topplethenun.spoils.configuration.MasterConfiguration;
-import me.topplethenun.spoils.configuration.VersionedSmartConfiguration.VersionUpdateType;
-import me.topplethenun.spoils.configuration.VersionedSmartYamlConfiguration;
-import me.topplethenun.spoils.io.Debugger;
+import me.topplethenun.spoils.api.SpoilsPlugin;
+import me.topplethenun.spoils.api.tiers.TierTrait;
+import me.topplethenun.spoils.api.tiers.TierTraitRegistry;
+import me.topplethenun.spoils.common.configuration.MasterConfiguration;
+import me.topplethenun.spoils.common.configuration.VersionedSmartConfiguration;
+import me.topplethenun.spoils.common.configuration.VersionedSmartYamlConfiguration;
+import me.topplethenun.spoils.common.io.Debugger;
 import me.topplethenun.spoils.tiers.StandardTierTrait;
-import me.topplethenun.spoils.tiers.TierTrait;
-import me.topplethenun.spoils.tiers.TierTraitRegistry;
-import org.bukkit.plugin.java.JavaPlugin;
+import me.topplethenun.spoils.tiers.TierTraitRegistryImpl;
 
 import java.io.File;
 import java.util.logging.Level;
 
-public class SpoilsPlugin extends JavaPlugin {
+public class SpoilsPluginImpl extends SpoilsPlugin {
 
     private TierTraitRegistry tierTraitRegistry;
     private Debugger debugger;
@@ -43,7 +44,7 @@ public class SpoilsPlugin extends JavaPlugin {
     @Override
     public void onEnable() {
         debugger = new Debugger(new File(getDataFolder(), "debug.log"));
-        tierTraitRegistry = new TierTraitRegistry();
+        tierTraitRegistry = new TierTraitRegistryImpl();
         for (TierTrait trait : StandardTierTrait.values()) {
             tierTraitRegistry.register(trait);
         }
@@ -51,17 +52,18 @@ public class SpoilsPlugin extends JavaPlugin {
         settings = new MasterConfiguration();
         VersionedSmartYamlConfiguration configuration = new VersionedSmartYamlConfiguration
                 (new File(getDataFolder(), "config.yml"), getResource("config.yml"),
-                 VersionUpdateType.BACKUP_AND_UPDATE);
+                 VersionedSmartConfiguration.VersionUpdateType.BACKUP_AND_UPDATE);
         configuration.update();
         settings.load(configuration);
         configuration = new VersionedSmartYamlConfiguration(new File(getDataFolder(), "tiers.yml"),
                                                             getResource("tiers.yml"),
-                                                            VersionUpdateType.BACKUP_AND_UPDATE);
+                                                            VersionedSmartConfiguration.VersionUpdateType.BACKUP_AND_UPDATE);
         configuration.update();
 
         debug("Enabling v" + getDescription().getVersion());
     }
 
+    @Override
     public void debug(String... messages) {
         debug(Level.INFO, messages);
     }
@@ -72,6 +74,7 @@ public class SpoilsPlugin extends JavaPlugin {
         }
     }
 
+    @Override
     public TierTraitRegistry getTierTraitRegistry() {
         return tierTraitRegistry;
     }
@@ -80,6 +83,7 @@ public class SpoilsPlugin extends JavaPlugin {
         return debugger;
     }
 
+    @Override
     public MasterConfiguration getSettings() {
         return settings;
     }

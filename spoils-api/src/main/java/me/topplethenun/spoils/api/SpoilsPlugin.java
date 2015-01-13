@@ -14,6 +14,7 @@
  */
 package me.topplethenun.spoils.api;
 
+import me.topplethenun.spoils.api.tiers.TierTraitRegistry;
 import me.topplethenun.spoils.common.configuration.MasterConfiguration;
 import org.bukkit.plugin.java.JavaPlugin;
 
@@ -39,5 +40,11 @@ public abstract class SpoilsPlugin extends JavaPlugin {
      * @return MasterConfiguration
      */
     public abstract MasterConfiguration getSettings();
+
+    /**
+     * Gets and returns the TierTraitRegistry for this instance.
+     * @return TierTraitRegistry
+     */
+    public abstract TierTraitRegistry getTierTraitRegistry();
 
 }
