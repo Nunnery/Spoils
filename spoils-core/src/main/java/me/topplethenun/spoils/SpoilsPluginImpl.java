@@ -79,10 +79,6 @@ public class SpoilsPluginImpl extends SpoilsPlugin {
         return tierTraitRegistry;
     }
 
-    public Debugger getDebugger() {
-        return debugger;
-    }
-
     @Override
     public MasterConfiguration getSettings() {
         return settings;
