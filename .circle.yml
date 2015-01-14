@@ -1,6 +1,7 @@
 dependencies:
   override:
-    - gradle publish
+    - chmod +x gradlew
+    - ./gradlew publish
 
 general:
   artifacts:
@@ -10,4 +11,4 @@ general:
 
 test:
   override:
-    - gradle test
+    - ./gradlew test
