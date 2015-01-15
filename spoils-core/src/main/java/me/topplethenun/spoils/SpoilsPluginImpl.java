@@ -15,16 +15,23 @@
 package me.topplethenun.spoils;
 
 import me.topplethenun.spoils.api.SpoilsPlugin;
+import me.topplethenun.spoils.api.loaders.TierLoader;
+import me.topplethenun.spoils.api.managers.TierManager;
+import me.topplethenun.spoils.api.tiers.Tier;
 import me.topplethenun.spoils.api.tiers.TierTrait;
 import me.topplethenun.spoils.api.tiers.TierTraitRegistry;
 import me.topplethenun.spoils.common.configuration.MasterConfiguration;
+import me.topplethenun.spoils.common.configuration.SmartYamlConfiguration;
 import me.topplethenun.spoils.common.configuration.VersionedSmartConfiguration;
 import me.topplethenun.spoils.common.configuration.VersionedSmartYamlConfiguration;
 import me.topplethenun.spoils.common.io.Debugger;
+import me.topplethenun.spoils.loaders.TierLoaderImpl;
+import me.topplethenun.spoils.managers.TierManagerImpl;
 import me.topplethenun.spoils.tiers.StandardTierTrait;
 import me.topplethenun.spoils.tiers.TierTraitRegistryImpl;
 
 import java.io.File;
+import java.util.Set;
 import java.util.logging.Level;
 
 public class SpoilsPluginImpl extends SpoilsPlugin {
@@ -32,6 +39,7 @@ public class SpoilsPluginImpl extends SpoilsPlugin {
     private TierTraitRegistry tierTraitRegistry;
     private Debugger debugger;
     private MasterConfiguration settings;
+    private TierManager tierManager;
 
     @Override
     public void onDisable() {
@@ -60,6 +68,12 @@ public class SpoilsPluginImpl extends SpoilsPlugin {
                                                             VersionedSmartConfiguration.VersionUpdateType.BACKUP_AND_UPDATE);
         configuration.update();
 
+        tierManager = new TierManagerImpl();
+        Set<Tier> tierSet = getNewTierLoader().load();
+        for (Tier t : tierSet) {
+            tierManager.add(t);
+        }
+
         debug("Enabling v" + getDescription().getVersion());
     }
 
@@ -82,5 +96,17 @@ public class SpoilsPluginImpl extends SpoilsPlugin {
     @Override
     public MasterConfiguration getSettings() {
         return settings;
+    }
+
+    @Override
+    public TierManager getTierManager() {
+        return tierManager;
+    }
+
+    @Override
+    public TierLoader getNewTierLoader() {
+        SmartYamlConfiguration configuration = new SmartYamlConfiguration(new File(getDataFolder(), "tiers" +
+                ".yml"));
+        return new TierLoaderImpl(configuration, getTierTraitRegistry().getRegisteredTraits());
     }
 }

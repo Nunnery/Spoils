@@ -14,6 +14,17 @@
  */
 package me.topplethenun.spoils.api.tiers;
 
+import java.util.Map;
+
 public interface Tier {
 
+    String getName();
+
+    Object getTraitValue(TierTrait trait);
+
+    void setTraitValue(TierTrait trait, Object value);
+
+    boolean hasTraitValue(TierTrait trait);
+
+    Map<TierTrait, Object> getTraitValues();
 }

@@ -14,6 +14,7 @@
  */
 package me.topplethenun.spoils.api;
 
+import me.topplethenun.spoils.api.loaders.TierLoader;
 import me.topplethenun.spoils.api.managers.TierManager;
 import me.topplethenun.spoils.api.tiers.TierTraitRegistry;
 import me.topplethenun.spoils.common.configuration.MasterConfiguration;
@@ -53,5 +54,7 @@ public abstract class SpoilsPlugin extends JavaPlugin {
      * @return TierManager
      */
     public abstract TierManager getTierManager();
+
+    public abstract TierLoader getNewTierLoader();
 
 }

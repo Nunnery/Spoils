@@ -33,6 +33,12 @@ public class TierImpl implements Tier {
         this.traitValueMap = new ConcurrentHashMap<>();
     }
 
+    @Override
+    public String getName() {
+        return name;
+    }
+
+    @Override
     public Object getTraitValue(TierTrait trait) {
         Validate.notNull(trait, "trait cannot be null");
         if (!traitValueMap.containsKey(trait)) {
@@ -41,6 +47,7 @@ public class TierImpl implements Tier {
         return traitValueMap.get(trait);
     }
 
+    @Override
     public void setTraitValue(TierTrait trait, Object value) {
         Validate.notNull(trait, "trait cannot be null");
         Validate.notNull(value, "value cannot be null");
@@ -54,11 +61,13 @@ public class TierImpl implements Tier {
         traitValueMap.put(trait, value);
     }
 
+    @Override
     public boolean hasTraitValue(TierTrait trait) {
         Validate.notNull(trait, "trait cannot be null");
         return traitValueMap.containsKey(trait);
     }
 
+    @Override
     public Map<TierTrait, Object> getTraitValues() {
         return new HashMap<>(traitValueMap);
     }
