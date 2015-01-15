@@ -14,6 +14,7 @@
  */
 package me.topplethenun.spoils.api;
 
+import me.topplethenun.spoils.api.managers.TierManager;
 import me.topplethenun.spoils.api.tiers.TierTraitRegistry;
 import me.topplethenun.spoils.common.configuration.MasterConfiguration;
 import org.bukkit.plugin.java.JavaPlugin;
@@ -46,5 +47,11 @@ public abstract class SpoilsPlugin extends JavaPlugin {
      * @return TierTraitRegistry
      */
     public abstract TierTraitRegistry getTierTraitRegistry();
+
+    /**
+     * Gets and returns the TierManager for this instance.
+     * @return TierManager
+     */
+    public abstract TierManager getTierManager();
 
 }
