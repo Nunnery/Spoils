@@ -48,8 +48,12 @@ public class TierLoaderImpl implements TierLoader {
             ConfigurationSection cs = configuration.getConfigurationSection(key);
             TierImpl tier = new TierImpl(key);
             for (TierTrait trait : traits) {
-                Object value = trait.valueClass().equals(ChatColor.class) ? ChatColor.valueOf(cs.getString(trait.key()))
-                        : cs.get(trait.key(), trait.defaultValue());
+                Object value;
+                if (trait.valueClass().equals(ChatColor.class)) {
+                    value = ChatColor.valueOf(cs.getString(trait.key()));
+                } else {
+                    value = cs.get(trait.key(), trait.defaultValue());
+                }
                 tier.setTraitValue(trait, value);
             }
             tiers.add(tier);
