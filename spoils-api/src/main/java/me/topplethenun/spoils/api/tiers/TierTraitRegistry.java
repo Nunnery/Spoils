@@ -14,30 +14,53 @@
  */
 package me.topplethenun.spoils.api.tiers;
 
+import com.google.common.base.Optional;
+
 import java.util.Set;
 
 public interface TierTraitRegistry {
     /**
      * Register a TierTrait if it is not already registered.
+     *
      * @param trait TierTrait to register
      */
     void register(TierTrait trait);
 
     /**
      * Unregister a TierTrait if it is already registered.
+     *
      * @param trait TierTrait to unregister
      */
     void unregister(TierTrait trait);
 
     /**
+     * Attempts to find a TierTrait with the given name. Returns an {@link com.google.common.base.Optional} wrapped
+     * around the TierTrait.
+     *
+     * @param name name of TierTriat to check
+     * @return Optional wrapped around a TierTrait if it exists
+     */
+    Optional<TierTrait> findTierTrait(String name);
+
+    /**
      * Checks and returns if the given TierTrait is registered.
+     *
      * @param trait TierTrait to check
      * @return if TierTrait is registered
      */
     boolean isRegistered(TierTrait trait);
 
     /**
+     * Checks and returns if a TierTrait with the given name is registered.
+     *
+     * @param name name to check
+     * @return if a TierTrait with given name is registered
+     */
+    boolean isRegistered(String name);
+
+    /**
      * Gets and returns a Set of all registered TierTraits.
+     *
      * @return Set of all registered TierTraits
      */
     Set<TierTrait> getRegisteredTraits();
