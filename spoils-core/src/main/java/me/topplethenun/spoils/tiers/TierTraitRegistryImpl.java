@@ -14,6 +14,7 @@
  */
 package me.topplethenun.spoils.tiers;
 
+import com.google.common.base.Optional;
 import me.topplethenun.spoils.api.tiers.TierTrait;
 import me.topplethenun.spoils.api.tiers.TierTraitRegistry;
 import org.apache.commons.lang.Validate;
@@ -50,9 +51,23 @@ public class TierTraitRegistryImpl implements TierTraitRegistry {
     }
 
     @Override
+    public Optional<TierTrait> findTierTrait(String name) {
+        Validate.notNull(name, "name cannot be null");
+        Optional<TierTrait> optional = Optional.absent();
+        return !registeredTraits.containsKey(name.toLowerCase()) ? optional :
+                Optional.of(registeredTraits.get(name.toLowerCase()));
+    }
+
+    @Override
     public boolean isRegistered(TierTrait trait) {
         Validate.notNull(trait, "trait cannot be null");
-        return registeredTraits.containsKey(trait.key());
+        return registeredTraits.containsKey(trait.key().toLowerCase());
+    }
+
+    @Override
+    public boolean isRegistered(String name) {
+        Validate.notNull(name, "name cannot be null");
+        return registeredTraits.containsKey(name.toLowerCase());
     }
 
     @Override
