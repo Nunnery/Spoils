@@ -73,6 +73,7 @@ public class SpoilsPluginImpl extends SpoilsPlugin {
         for (Tier t : tierSet) {
             tierManager.add(t);
         }
+        debug("Loaded tiers: " + tierSet.size());
 
         debug("Enabling v" + getDescription().getVersion());
     }
