@@ -1,5 +1,6 @@
 plugins {
     id "com.github.hierynomus.license" version "0.11.0"
+    id "com.github.johnrengelman.shadow" version "1.2.0"
 }
 
 group = "me.topplethenun"
@@ -11,6 +12,8 @@ dependencies {
     compile("org.spigotmc:spigot-api:1.8-R0.1-SNAPSHOT") {
         exclude group: "net.md-5"
     }
+    compile "me.topplethenun:hilt:latest.integration"
+    compile "me.topplethenun:config:latest.integration"
 }
 
 license {
@@ -28,6 +31,10 @@ publishing {
             artifactId = "spoils-common"
             from components.java
         }
+        shadow(MavenPublication) {
+            artifactId = "spoils-common-all"
+            from components.shadow
+        }
     }
     repositories {
         maven {
@@ -38,5 +45,12 @@ publishing {
                 password System.getenv("nexusPassword") ?: nexusPassword
             }
         }
+    }
+}
+
+shadowJar {
+    dependencies {
+        include "me.topplethenun:config"
+        include "me.topplethenun:hilt"
     }
 }
