@@ -14,9 +14,9 @@
  */
 package me.topplethenun.spoils.api.builders;
 
+import me.topplethenun.hilt.HiltItemStack;
 import me.topplethenun.spoils.api.tiers.Tier;
 import me.topplethenun.spoils.common.builders.Builder;
-import me.topplethenun.spoils.common.hilt.HiltItemStack;
 import org.bukkit.Material;
 
 public interface ItemBuilder extends Builder<HiltItemStack> {

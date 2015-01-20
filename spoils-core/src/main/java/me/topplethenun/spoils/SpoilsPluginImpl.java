@@ -14,16 +14,16 @@
  */
 package me.topplethenun.spoils;
 
+import me.topplethenun.config.MasterConfiguration;
+import me.topplethenun.config.SmartYamlConfiguration;
+import me.topplethenun.config.VersionedSmartConfiguration;
+import me.topplethenun.config.VersionedSmartYamlConfiguration;
 import me.topplethenun.spoils.api.SpoilsPlugin;
 import me.topplethenun.spoils.api.loaders.TierLoader;
 import me.topplethenun.spoils.api.managers.TierManager;
 import me.topplethenun.spoils.api.tiers.Tier;
 import me.topplethenun.spoils.api.tiers.TierTrait;
 import me.topplethenun.spoils.api.tiers.TierTraitRegistry;
-import me.topplethenun.spoils.common.configuration.MasterConfiguration;
-import me.topplethenun.spoils.common.configuration.SmartYamlConfiguration;
-import me.topplethenun.spoils.common.configuration.VersionedSmartConfiguration;
-import me.topplethenun.spoils.common.configuration.VersionedSmartYamlConfiguration;
 import me.topplethenun.spoils.common.io.Debugger;
 import me.topplethenun.spoils.loaders.TierLoaderImpl;
 import me.topplethenun.spoils.managers.TierManagerImpl;

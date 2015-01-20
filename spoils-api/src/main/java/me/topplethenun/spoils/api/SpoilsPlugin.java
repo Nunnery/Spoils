@@ -14,10 +14,10 @@
  */
 package me.topplethenun.spoils.api;
 
+import me.topplethenun.config.MasterConfiguration;
 import me.topplethenun.spoils.api.loaders.TierLoader;
 import me.topplethenun.spoils.api.managers.TierManager;
 import me.topplethenun.spoils.api.tiers.TierTraitRegistry;
-import me.topplethenun.spoils.common.configuration.MasterConfiguration;
 import org.bukkit.plugin.java.JavaPlugin;
 
 import java.util.logging.Level;
