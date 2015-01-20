@@ -25,14 +25,14 @@ license {
     }
 }
 
+artifacts {
+    archives shadowJar
+}
+
 publishing {
     publications {
         java(MavenPublication) {
             artifactId = "spoils-common"
-            from components.java
-        }
-        shadow(MavenPublication) {
-            artifactId = "spoils-common-all"
             from components.shadow
         }
     }
@@ -50,7 +50,10 @@ publishing {
 
 shadowJar {
     dependencies {
-        include "me.topplethenun:config"
-        include "me.topplethenun:hilt"
+        include(dependency("me.topplethenun:config:"))
+        include(dependency("me.topplethenun:hilt"))
     }
+
+    relocate "me.topplethenun.config", "me.topplethenun.spoils.config"
+    relocate "me.topplethenun.hilt", "me.topplethenun.spoils.hilt"
 }
