@@ -20,12 +20,14 @@ import me.topplethenun.config.VersionedSmartConfiguration;
 import me.topplethenun.config.VersionedSmartYamlConfiguration;
 import me.topplethenun.spoils.api.SpoilsPlugin;
 import me.topplethenun.spoils.api.loaders.TierLoader;
+import me.topplethenun.spoils.api.managers.ItemGroupManager;
 import me.topplethenun.spoils.api.managers.TierManager;
 import me.topplethenun.spoils.api.tiers.Tier;
 import me.topplethenun.spoils.api.tiers.TierTrait;
 import me.topplethenun.spoils.api.tiers.TierTraitRegistry;
 import me.topplethenun.spoils.common.io.Debugger;
 import me.topplethenun.spoils.loaders.TierLoaderImpl;
+import me.topplethenun.spoils.managers.ItemGroupManagerImpl;
 import me.topplethenun.spoils.managers.TierManagerImpl;
 import me.topplethenun.spoils.tiers.StandardTierTrait;
 import me.topplethenun.spoils.tiers.TierTraitRegistryImpl;
@@ -40,6 +42,7 @@ public class SpoilsPluginImpl extends SpoilsPlugin {
     private Debugger debugger;
     private MasterConfiguration settings;
     private TierManager tierManager;
+    private ItemGroupManager itemGroupManager;
 
     @Override
     public void onDisable() {
@@ -60,15 +63,20 @@ public class SpoilsPluginImpl extends SpoilsPlugin {
         settings = new MasterConfiguration();
         VersionedSmartYamlConfiguration configuration = new VersionedSmartYamlConfiguration
                 (new File(getDataFolder(), "config.yml"), getResource("config.yml"),
-                 VersionedSmartConfiguration.VersionUpdateType.BACKUP_AND_UPDATE);
+                        VersionedSmartConfiguration.VersionUpdateType.BACKUP_AND_UPDATE);
         configuration.update();
         settings.load(configuration);
         configuration = new VersionedSmartYamlConfiguration(new File(getDataFolder(), "tiers.yml"),
-                                                            getResource("tiers.yml"),
-                                                            VersionedSmartConfiguration.VersionUpdateType.BACKUP_AND_UPDATE);
+                getResource("tiers.yml"),
+                VersionedSmartConfiguration.VersionUpdateType.BACKUP_AND_UPDATE);
+        configuration.update();
+        configuration = new VersionedSmartYamlConfiguration(new File(getDataFolder(), "groups.yml"),
+                getResource("groups.yml"), VersionedSmartConfiguration.VersionUpdateType.BACKUP_AND_UPDATE);
         configuration.update();
 
+
         tierManager = new TierManagerImpl();
+        itemGroupManager = new ItemGroupManagerImpl();
 
         getServer().getScheduler().scheduleSyncDelayedTask(this, new Runnable() {
             @Override
@@ -84,11 +92,6 @@ public class SpoilsPluginImpl extends SpoilsPlugin {
         debug("Enabling v" + getDescription().getVersion());
     }
 
-    @Override
-    public void debug(String... messages) {
-        debug(Level.INFO, messages);
-    }
-
     public void debug(Level level, String... messages) {
         if (settings.getBoolean("config.debug")) {
             debugger.debug(level, messages);
@@ -96,13 +99,18 @@ public class SpoilsPluginImpl extends SpoilsPlugin {
     }
 
     @Override
-    public TierTraitRegistry getTierTraitRegistry() {
-        return tierTraitRegistry;
+    public void debug(String... messages) {
+        debug(Level.INFO, messages);
     }
 
     @Override
     public MasterConfiguration getSettings() {
         return settings;
+    }
+
+    @Override
+    public TierTraitRegistry getTierTraitRegistry() {
+        return tierTraitRegistry;
     }
 
     @Override
@@ -112,9 +120,14 @@ public class SpoilsPluginImpl extends SpoilsPlugin {
 
     @Override
     public TierLoader getNewTierLoader() {
-        SmartYamlConfiguration configuration = new SmartYamlConfiguration(new File(getDataFolder(), "tiers" +
-                ".yml"));
+        SmartYamlConfiguration configuration = new SmartYamlConfiguration(
+                new File(getDataFolder(), "tiers.yml"));
         return new TierLoaderImpl(configuration, getTierTraitRegistry().getRegisteredTraits());
+    }
+
+    @Override
+    public ItemGroupManager getItemGroupManager() {
+        return itemGroupManager;
     }
 
 }
