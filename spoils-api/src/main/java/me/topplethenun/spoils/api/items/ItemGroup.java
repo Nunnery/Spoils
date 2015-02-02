@@ -20,6 +20,8 @@ import java.util.Set;
 
 public interface ItemGroup {
 
+    String getName();
+
     Type getType();
 
     Set<Material> getMaterials();
