@@ -17,7 +17,7 @@ package me.topplethenun.spoils.api.loaders;
 import me.topplethenun.spoils.api.items.ItemGroup;
 import me.topplethenun.spoils.common.loaders.Loader;
 
-import java.util.Map;
+import java.util.Set;
 
-public interface ItemGroupLoader extends Loader<Map<ItemGroup.Type, ItemGroup>> {
+public interface ItemGroupLoader extends Loader<Set<ItemGroup>> {
 }
