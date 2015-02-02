@@ -16,3 +16,19 @@ common:
   - LOOT_BONUS_MOBS:1:2
   bonus-enchantments-minimum: 0
   bonus-enchantments-maximum: 1
+  allowed-groups:
+  - sword
+  - axe
+  - pickaxe
+  - hoe
+  - shovel
+  - shears
+  - fishing rod
+  - bow
+  - helmet
+  - chestplate
+  - leggings
+  - boots
+  disallowed-groups:
+  - iron
+  - diamond
