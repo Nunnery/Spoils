@@ -19,6 +19,7 @@ import me.topplethenun.config.SmartYamlConfiguration;
 import me.topplethenun.config.VersionedSmartConfiguration;
 import me.topplethenun.config.VersionedSmartYamlConfiguration;
 import me.topplethenun.spoils.api.SpoilsPlugin;
+import me.topplethenun.spoils.api.items.ItemGroup;
 import me.topplethenun.spoils.api.loaders.ItemGroupLoader;
 import me.topplethenun.spoils.api.loaders.TierLoader;
 import me.topplethenun.spoils.api.managers.ItemGroupManager;
@@ -79,6 +80,12 @@ public class SpoilsPluginImpl extends SpoilsPlugin {
 
         tierManager = new TierManagerImpl();
         itemGroupManager = new ItemGroupManagerImpl();
+
+        Set<ItemGroup> itemGroupSet = getNewItemGroupLoader().load();
+        for (ItemGroup ig : itemGroupSet) {
+            getItemGroupManager().add(ig);
+        }
+        debug("Loaded item groups: " + itemGroupSet.size());
 
         getServer().getScheduler().scheduleSyncDelayedTask(this, new Runnable() {
             @Override
