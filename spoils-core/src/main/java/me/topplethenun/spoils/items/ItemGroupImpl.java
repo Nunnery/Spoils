@@ -26,23 +26,25 @@ public class ItemGroupImpl implements ItemGroup {
     private final Set<Material> materials;
     private final boolean inverse;
     private final Type type;
+    private final String name;
 
-    public ItemGroupImpl(Material... materials) {
-        this(new HashSet<>(Arrays.asList(materials)));
+    public ItemGroupImpl(String name, Material... materials) {
+        this(new HashSet<>(Arrays.asList(materials)), name);
     }
 
-    public ItemGroupImpl(Set<Material> materials) {
-        this(materials, false);
+    public ItemGroupImpl(Set<Material> materials, String name) {
+        this(materials, false, name);
     }
 
-    public ItemGroupImpl(Set<Material> materials, boolean inverse) {
-        this(materials, inverse, Type.UNKNOWN);
+    public ItemGroupImpl(Set<Material> materials, boolean inverse, String name) {
+        this(materials, inverse, Type.UNKNOWN, name);
     }
 
-    public ItemGroupImpl(Set<Material> materials, boolean inverse, Type type) {
+    public ItemGroupImpl(Set<Material> materials, boolean inverse, Type type, String name) {
         this.materials = materials;
         this.inverse = inverse;
         this.type = type;
+        this.name = name;
     }
 
     @Override
@@ -57,12 +59,17 @@ public class ItemGroupImpl implements ItemGroup {
 
     @Override
     public ItemGroup inverse() {
-        return new ItemGroupImpl(getMaterials(), !isInverse());
+        return new ItemGroupImpl(getMaterials(), !isInverse(), name);
     }
 
     @Override
     public Type getType() {
         return type;
+    }
+
+    @Override
+    public String getName() {
+        return name;
     }
 
 }
