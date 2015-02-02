@@ -69,11 +69,17 @@ public class SpoilsPluginImpl extends SpoilsPlugin {
         configuration.update();
 
         tierManager = new TierManagerImpl();
-        Set<Tier> tierSet = getNewTierLoader().load();
-        for (Tier t : tierSet) {
-            tierManager.add(t);
-        }
-        debug("Loaded tiers: " + tierSet.size());
+
+        getServer().getScheduler().scheduleSyncDelayedTask(this, new Runnable() {
+            @Override
+            public void run() {
+                Set<Tier> tierSet = getNewTierLoader().load();
+                for (Tier t : tierSet) {
+                    getTierManager().add(t);
+                }
+                debug("Loaded tiers: " + tierSet.size());
+            }
+        }, 20L);
 
         debug("Enabling v" + getDescription().getVersion());
     }
@@ -110,4 +116,5 @@ public class SpoilsPluginImpl extends SpoilsPlugin {
                 ".yml"));
         return new TierLoaderImpl(configuration, getTierTraitRegistry().getRegisteredTraits());
     }
+
 }
