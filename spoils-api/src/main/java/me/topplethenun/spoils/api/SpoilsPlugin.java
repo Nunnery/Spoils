@@ -16,6 +16,7 @@ package me.topplethenun.spoils.api;
 
 import me.topplethenun.config.MasterConfiguration;
 import me.topplethenun.spoils.api.loaders.TierLoader;
+import me.topplethenun.spoils.api.managers.ItemGroupManager;
 import me.topplethenun.spoils.api.managers.TierManager;
 import me.topplethenun.spoils.api.tiers.TierTraitRegistry;
 import org.bukkit.plugin.java.JavaPlugin;
@@ -56,5 +57,7 @@ public abstract class SpoilsPlugin extends JavaPlugin {
     public abstract TierManager getTierManager();
 
     public abstract TierLoader getNewTierLoader();
+
+    public abstract ItemGroupManager getItemGroupManager();
 
 }
