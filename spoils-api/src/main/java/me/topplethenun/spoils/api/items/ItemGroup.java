@@ -29,10 +29,28 @@ public interface ItemGroup {
     ItemGroup inverse();
 
     enum Type {
-        WEAPON,
-        ARMOR,
-        MATERIAL,
-        UNKNOWN
+        TOOL("tools"),
+        ARMOR("armor"),
+        MATERIAL("materials"),
+        UNKNOWN("");
+
+        private final String path;
+        private Type(String path) {
+            this.path = path;
+        }
+
+        public String getPath() {
+            return path;
+        }
+
+        public static Type fromString(String s) {
+            for (Type val : values()) {
+                if (val.getPath().equals(s)) {
+                    return val;
+                }
+            }
+            return UNKNOWN;
+        }
     }
 
 }
