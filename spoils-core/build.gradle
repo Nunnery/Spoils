@@ -56,7 +56,7 @@ publishing {
 
 shadowJar {
     dependencies {
-        include project(":spoils-common")
+        include project(path: ":spoils-common", configuration: "shadow")
         include project(":spoils-api")
     }
 }

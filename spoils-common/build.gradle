@@ -49,11 +49,10 @@ publishing {
 }
 
 shadowJar {
+    classifier ""
+
     dependencies {
         include(dependency("me.topplethenun:config"))
         include(dependency("me.topplethenun:hilt"))
     }
-
-    relocate "me.topplethenun.config", "me.topplethenun.spoils.config"
-    relocate "me.topplethenun.hilt", "me.topplethenun.spoils.hilt"
 }
