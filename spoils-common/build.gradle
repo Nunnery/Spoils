@@ -50,7 +50,7 @@ publishing {
 
 shadowJar {
     dependencies {
-        include(dependency("me.topplethenun:config:"))
+        include(dependency("me.topplethenun:config"))
         include(dependency("me.topplethenun:hilt"))
     }
 
