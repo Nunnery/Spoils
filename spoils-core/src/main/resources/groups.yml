@@ -61,7 +61,7 @@ armor:
   - CHAINMAIL_BOOTS
   - IRON_BOOTS
   - DIAMOND_BOOTS
-materialGroups:
+materials:
   leather:
   - LEATHER_HELMET
   - LEATHER_CHESTPLATE
