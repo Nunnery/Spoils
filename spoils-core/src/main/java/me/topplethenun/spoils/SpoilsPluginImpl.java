@@ -19,6 +19,7 @@ import me.topplethenun.config.SmartYamlConfiguration;
 import me.topplethenun.config.VersionedSmartConfiguration;
 import me.topplethenun.config.VersionedSmartYamlConfiguration;
 import me.topplethenun.spoils.api.SpoilsPlugin;
+import me.topplethenun.spoils.api.loaders.ItemGroupLoader;
 import me.topplethenun.spoils.api.loaders.TierLoader;
 import me.topplethenun.spoils.api.managers.ItemGroupManager;
 import me.topplethenun.spoils.api.managers.TierManager;
@@ -26,6 +27,7 @@ import me.topplethenun.spoils.api.tiers.Tier;
 import me.topplethenun.spoils.api.tiers.TierTrait;
 import me.topplethenun.spoils.api.tiers.TierTraitRegistry;
 import me.topplethenun.spoils.common.io.Debugger;
+import me.topplethenun.spoils.loaders.ItemGroupLoaderImpl;
 import me.topplethenun.spoils.loaders.TierLoaderImpl;
 import me.topplethenun.spoils.managers.ItemGroupManagerImpl;
 import me.topplethenun.spoils.managers.TierManagerImpl;
@@ -128,6 +130,13 @@ public class SpoilsPluginImpl extends SpoilsPlugin {
     @Override
     public ItemGroupManager getItemGroupManager() {
         return itemGroupManager;
+    }
+
+    @Override
+    public ItemGroupLoader getNewItemGroupLoader() {
+        SmartYamlConfiguration configuration = new SmartYamlConfiguration(
+                new File(getDataFolder(), "groups.yml"));
+        return new ItemGroupLoaderImpl(configuration);
     }
 
 }
