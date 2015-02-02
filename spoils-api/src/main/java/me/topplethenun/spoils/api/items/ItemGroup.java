@@ -20,10 +20,19 @@ import java.util.Set;
 
 public interface ItemGroup {
 
+    Type getType();
+
     Set<Material> getMaterials();
 
     boolean isInverse();
 
     ItemGroup inverse();
+
+    enum Type {
+        WEAPON,
+        ARMOR,
+        MATERIAL,
+        UNKNOWN
+    }
 
 }
