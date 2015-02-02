@@ -79,4 +79,22 @@ public final class TextUtils {
         return s;
     }
 
+    public static List<String> args(List<String> pList, String[][] placeholders) {
+        Validate.notNull(pList, "pList cannot be null");
+        List<String> list = new ArrayList<>();
+        for (String s : pList) {
+            list.add(args(s, placeholders));
+        }
+        return list;
+    }
+
+    public static String args(String pString, String[][] placeholders) {
+        Validate.notNull(pString, "pString cannot be null");
+        String s = pString;
+        for (String[] placeholder : placeholders) {
+            s = StringUtils.replace(s, placeholder[0], placeholder[1]);
+        }
+        return s;
+    }
+
 }
