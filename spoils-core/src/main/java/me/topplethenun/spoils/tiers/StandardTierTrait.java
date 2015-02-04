@@ -14,6 +14,7 @@
  */
 package me.topplethenun.spoils.tiers;
 
+import me.topplethenun.spoils.api.items.ItemGroup;
 import me.topplethenun.spoils.api.tiers.TierTrait;
 import me.topplethenun.spoils.common.enchantments.LeveledEnchantment;
 import org.bukkit.ChatColor;
@@ -35,7 +36,9 @@ public enum StandardTierTrait implements TierTrait {
     BASE_ENCHANTMENTS("base-enchantments", Set.class, new HashSet<LeveledEnchantment>()),
     BONUS_ENCHANTMENTS("bonus-enchantments", Set.class, new HashSet<LeveledEnchantment>()),
     MINIMUM_BONUS_ENCHANTMENTS("bonus-enchantments-minimum", Integer.class, 0),
-    MAXIMUM_BONUS_ENCHANTMENTS("bonus-enchantments-maximum", Integer.class, 0);
+    MAXIMUM_BONUS_ENCHANTMENTS("bonus-enchantments-maximum", Integer.class, 0),
+    ALLOWED_ITEM_GROUPS("allowed-groups", List.class, new ArrayList<ItemGroup>()),
+    DISALLOWED_ITEM_GROUPS("disallowed-groups", List.class, new ArrayList<ItemGroup>());
 
     private final String key;
     private final Class valueClass;
