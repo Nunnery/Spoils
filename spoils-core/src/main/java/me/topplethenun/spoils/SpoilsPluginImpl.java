@@ -41,11 +41,16 @@ import java.util.logging.Level;
 
 public class SpoilsPluginImpl extends SpoilsPlugin {
 
+    private static SpoilsPlugin instance;
     private TierTraitRegistry tierTraitRegistry;
     private Debugger debugger;
     private MasterConfiguration settings;
     private TierManager tierManager;
     private ItemGroupManager itemGroupManager;
+
+    public static SpoilsPlugin getInstance() {
+        return instance;
+    }
 
     @Override
     public void onDisable() {
@@ -57,6 +62,7 @@ public class SpoilsPluginImpl extends SpoilsPlugin {
 
     @Override
     public void onEnable() {
+        instance = this;
         debugger = new Debugger(new File(getDataFolder(), "debug.log"));
         tierTraitRegistry = new TierTraitRegistryImpl();
         for (TierTrait trait : StandardTierTrait.values()) {
