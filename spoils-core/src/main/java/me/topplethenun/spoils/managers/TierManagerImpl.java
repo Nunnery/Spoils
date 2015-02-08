@@ -17,7 +17,6 @@ package me.topplethenun.spoils.managers;
 import com.google.common.base.Optional;
 import me.topplethenun.spoils.api.managers.TierManager;
 import me.topplethenun.spoils.api.tiers.Tier;
-import me.topplethenun.spoils.tiers.StandardTierTrait;
 import org.apache.commons.lang.Validate;
 
 import java.util.HashSet;

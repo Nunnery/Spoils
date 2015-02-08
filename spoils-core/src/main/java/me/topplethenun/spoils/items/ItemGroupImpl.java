@@ -14,6 +14,7 @@
  */
 package me.topplethenun.spoils.items;
 
+import com.google.common.base.Preconditions;
 import me.topplethenun.spoils.api.items.ItemGroup;
 import org.bukkit.Material;
 
@@ -41,6 +42,9 @@ public class ItemGroupImpl implements ItemGroup {
     }
 
     public ItemGroupImpl(Set<Material> materials, boolean inverse, Type type, String name) {
+        Preconditions.checkNotNull(materials);
+        Preconditions.checkNotNull(type);
+        Preconditions.checkNotNull(name);
         this.materials = materials;
         this.inverse = inverse;
         this.type = type;
@@ -72,4 +76,22 @@ public class ItemGroupImpl implements ItemGroup {
         return name;
     }
 
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) {
+            return true;
+        }
+        if (!(o instanceof ItemGroupImpl)) {
+            return false;
+        }
+
+        ItemGroupImpl itemGroup = (ItemGroupImpl) o;
+
+        return !(name != null ? !name.equals(itemGroup.name) : itemGroup.name != null);
+    }
+
+    @Override
+    public int hashCode() {
+        return name != null ? name.hashCode() : 0;
+    }
 }

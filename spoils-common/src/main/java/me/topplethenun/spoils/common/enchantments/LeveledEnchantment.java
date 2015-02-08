@@ -14,7 +14,13 @@
  */
 package me.topplethenun.spoils.common.enchantments;
 
+import com.google.common.base.Preconditions;
+import com.google.common.base.Splitter;
+import com.google.common.collect.Lists;
+import org.apache.commons.lang.math.NumberUtils;
 import org.bukkit.enchantments.Enchantment;
+
+import java.util.List;
 
 public class LeveledEnchantment {
 
@@ -26,6 +32,13 @@ public class LeveledEnchantment {
         this.enchantment = enchantment;
         this.minimumLevel = Math.min(first, second);
         this.maximumLevel = Math.max(first, second);
+    }
+
+    public static LeveledEnchantment fromString(String s) {
+        Preconditions.checkNotNull(s);
+        List<String> splitString = Lists.newArrayList(Splitter.on(":").omitEmptyStrings().trimResults().split(s));
+        return new LeveledEnchantment(Enchantment.getByName(splitString.get(0)),
+                NumberUtils.toInt(splitString.get(1)), NumberUtils.toInt(splitString.get(2)));
     }
 
     public Enchantment getEnchantment() {
@@ -63,4 +76,5 @@ public class LeveledEnchantment {
                 minimumLevel == that.minimumLevel &&
                 !(enchantment != null ? !enchantment.equals(that.enchantment) : that.enchantment != null);
     }
+
 }

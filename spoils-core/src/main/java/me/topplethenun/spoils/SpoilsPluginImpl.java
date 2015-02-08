@@ -32,7 +32,6 @@ import me.topplethenun.spoils.loaders.ItemGroupLoaderImpl;
 import me.topplethenun.spoils.loaders.TierLoaderImpl;
 import me.topplethenun.spoils.managers.ItemGroupManagerImpl;
 import me.topplethenun.spoils.managers.TierManagerImpl;
-import me.topplethenun.spoils.tiers.StandardTierTrait;
 import me.topplethenun.spoils.tiers.TierTraitRegistryImpl;
 
 import java.io.File;
@@ -65,9 +64,6 @@ public class SpoilsPluginImpl extends SpoilsPlugin {
         instance = this;
         debugger = new Debugger(new File(getDataFolder(), "debug.log"));
         tierTraitRegistry = new TierTraitRegistryImpl();
-        for (TierTrait trait : StandardTierTrait.values()) {
-            tierTraitRegistry.register(trait);
-        }
 
         settings = new MasterConfiguration();
         VersionedSmartYamlConfiguration configuration = new VersionedSmartYamlConfiguration

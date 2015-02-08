@@ -1,5 +1,5 @@
 /*
- * This file is part of spoils-core, licensed under the ISC License.
+ * This file is part of spoils-api, licensed under the ISC License.
  *
  * Copyright (c) 2014 Richard Harrah
  *
@@ -12,10 +12,9 @@
  * ACTION OF CONTRACT, NEGLIGENCE OR OTHER TORTIOUS ACTION, ARISING OUT OF OR IN CONNECTION WITH THE USE OR PERFORMANCE OF
  * THIS SOFTWARE.
  */
-package me.topplethenun.spoils.tiers;
+package me.topplethenun.spoils.api.tiers;
 
 import me.topplethenun.spoils.api.items.ItemGroup;
-import me.topplethenun.spoils.api.tiers.TierTrait;
 import me.topplethenun.spoils.common.enchantments.LeveledEnchantment;
 import org.bukkit.ChatColor;
 
