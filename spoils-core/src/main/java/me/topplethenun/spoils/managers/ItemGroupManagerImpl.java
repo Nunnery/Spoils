@@ -18,6 +18,7 @@ import com.google.common.base.Optional;
 import me.topplethenun.spoils.api.items.ItemGroup;
 import me.topplethenun.spoils.api.managers.ItemGroupManager;
 import org.apache.commons.lang.Validate;
+import org.bukkit.Material;
 
 import java.util.HashSet;
 import java.util.Map;
@@ -65,6 +66,28 @@ public class ItemGroupManagerImpl implements ItemGroupManager {
     @Override
     public Set<ItemGroup> getManaged() {
         return new HashSet<>(itemGroupMap.values());
+    }
+
+    @Override
+    public Set<ItemGroup> findItemGroups(Material material) {
+        Set<ItemGroup> itemGroups = new HashSet<>();
+        for (ItemGroup val : itemGroupMap.values()) {
+            if (val.getMaterials().contains(material)) {
+                itemGroups.add(val);
+            }
+        }
+        return itemGroups;
+    }
+
+    @Override
+    public Set<ItemGroup> findItemGroups(Material material, ItemGroup.Type type) {
+        Set<ItemGroup> itemGroups = new HashSet<>();
+        for (ItemGroup val : itemGroupMap.values()) {
+            if (val.getType() == type && val.getMaterials().contains(material)) {
+                itemGroups.add(val);
+            }
+        }
+        return itemGroups;
     }
 
 }
