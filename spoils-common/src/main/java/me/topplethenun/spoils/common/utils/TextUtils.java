@@ -107,4 +107,15 @@ public final class TextUtils {
         return s;
     }
 
+    public static List<String> insert(List<String> aList, List<String> bList, int index) {
+        Validate.notNull(aList);
+        Validate.notNull(bList);
+        List<String> cList = new ArrayList<>(aList);
+        while (cList.size() < index) {
+            cList.add("");
+        }
+        cList.addAll(index, bList);
+        return cList;
+    }
+
 }
