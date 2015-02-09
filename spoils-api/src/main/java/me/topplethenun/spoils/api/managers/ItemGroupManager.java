@@ -16,6 +16,14 @@ package me.topplethenun.spoils.api.managers;
 
 import me.topplethenun.spoils.api.items.ItemGroup;
 import me.topplethenun.spoils.common.managers.Manager;
+import org.bukkit.Material;
+
+import java.util.Set;
 
 public interface ItemGroupManager extends Manager<ItemGroup> {
+
+    Set<ItemGroup> findItemGroups(Material material);
+
+    Set<ItemGroup> findItemGroups(Material material, ItemGroup.Type type);
+
 }
