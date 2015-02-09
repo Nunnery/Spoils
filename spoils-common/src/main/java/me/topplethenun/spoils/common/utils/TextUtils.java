@@ -43,6 +43,16 @@ public final class TextUtils {
         // do nothing
     }
 
+    public static ChatColor convertTag(String pString) {
+        Validate.notNull(pString);
+        for (String key : COLOR_MAP.keySet()) {
+            if (key.equals(pString)) {
+                return COLOR_MAP.get(key);
+            }
+        }
+        return null;
+    }
+
     public static List<String> color(List<String> pList) {
         Validate.notNull(pList, "pList cannot be null");
         List<String> list = new ArrayList<>();
