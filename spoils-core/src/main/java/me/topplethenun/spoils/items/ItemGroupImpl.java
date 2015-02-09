@@ -29,10 +29,6 @@ public class ItemGroupImpl implements ItemGroup {
     private final Type type;
     private final String name;
 
-    public ItemGroupImpl(String name, Material... materials) {
-        this(new HashSet<>(Arrays.asList(materials)), name);
-    }
-
     public ItemGroupImpl(Set<Material> materials, String name) {
         this(materials, false, name);
     }
