@@ -55,4 +55,14 @@ public class NameTableImpl implements NameTable {
         nameTable.put(nameType, fileName, strings);
     }
 
+    @Override
+    public int getAmountOfLoadedNames(NameType nameType) {
+        Preconditions.checkNotNull(nameType);
+        int i = 0;
+        for (String s : getFileNames(nameType)) {
+            i += getAvailableNames(nameType, s).size();
+        }
+        return i;
+    }
+
 }
