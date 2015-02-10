@@ -24,4 +24,5 @@ public interface NameTable {
 
     void setAvailableNames(NameType nameType, String fileName, List<String> strings);
 
+    int getAmountOfLoadedNames(NameType nameType);
 }
