@@ -19,6 +19,8 @@ import java.io.File;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.io.InputStream;
+import java.io.InputStreamReader;
 import java.io.PrintWriter;
 import java.util.ArrayList;
 import java.util.List;
@@ -33,6 +35,52 @@ public class SmartTextFile {
 
     public File getFile() {
         return file;
+    }
+
+    public boolean exists() {
+        return file.getParentFile().exists() && file.exists();
+    }
+
+    public boolean create() {
+        if (!file.getParentFile().exists() && !file.getParentFile().mkdirs()) {
+            return false;
+        }
+        File saveTo = file;
+        try {
+            return !(!saveTo.exists() && !saveTo.createNewFile());
+        } catch (Exception e) {
+            return false;
+        }
+    }
+
+    public void write(InputStream inputStream) {
+        try {
+            if (!file.getParentFile().exists() && !file.getParentFile().mkdirs()) {
+                return;
+            }
+            File saveTo = file;
+            if (!saveTo.exists() && !saveTo.createNewFile()) {
+                return;
+            }
+            FileWriter fw = new FileWriter(saveTo.getPath(), true);
+            PrintWriter pw = new PrintWriter(fw);
+            InputStreamReader isr = new InputStreamReader(inputStream);
+            BufferedReader br = new BufferedReader(isr);
+            String p;
+            while ((p = br.readLine()) != null) {
+                if (p.length() > 0) {
+                    pw.println(p);
+                }
+            }
+            br.close();
+            isr.close();
+            pw.flush();
+            pw.close();
+            fw.flush();
+            fw.close();
+        } catch (IOException e) {
+            // do nothing
+        }
     }
 
     public void write(String... messages) {
@@ -51,6 +99,8 @@ public class SmartTextFile {
             }
             pw.flush();
             pw.close();
+            fw.flush();
+            fw.close();
         } catch (IOException ignored) {
             // do nothing
         }
@@ -75,6 +125,7 @@ public class SmartTextFile {
                 }
             }
             bufferedReader.close();
+            fileReader.close();
         } catch (IOException ignored) {
             // do nothing
         }
