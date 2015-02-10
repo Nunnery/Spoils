@@ -19,6 +19,7 @@ import me.topplethenun.spoils.api.loaders.ItemGroupLoader;
 import me.topplethenun.spoils.api.loaders.TierLoader;
 import me.topplethenun.spoils.api.managers.ItemGroupManager;
 import me.topplethenun.spoils.api.managers.TierManager;
+import me.topplethenun.spoils.api.names.NameTable;
 import me.topplethenun.spoils.api.tiers.TierTraitRegistry;
 import org.bukkit.plugin.java.JavaPlugin;
 
@@ -62,5 +63,7 @@ public abstract class SpoilsPlugin extends JavaPlugin {
     public abstract ItemGroupManager getItemGroupManager();
 
     public abstract ItemGroupLoader getNewItemGroupLoader();
+
+    public abstract NameTable getNameTable();
 
 }
