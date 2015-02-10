@@ -24,6 +24,7 @@ import me.topplethenun.spoils.api.loaders.ItemGroupLoader;
 import me.topplethenun.spoils.api.loaders.TierLoader;
 import me.topplethenun.spoils.api.managers.ItemGroupManager;
 import me.topplethenun.spoils.api.managers.TierManager;
+import me.topplethenun.spoils.api.names.NameTable;
 import me.topplethenun.spoils.api.tiers.Tier;
 import me.topplethenun.spoils.api.tiers.TierTrait;
 import me.topplethenun.spoils.api.tiers.TierTraitRegistry;
@@ -32,6 +33,7 @@ import me.topplethenun.spoils.loaders.ItemGroupLoaderImpl;
 import me.topplethenun.spoils.loaders.TierLoaderImpl;
 import me.topplethenun.spoils.managers.ItemGroupManagerImpl;
 import me.topplethenun.spoils.managers.TierManagerImpl;
+import me.topplethenun.spoils.names.NameTableImpl;
 import me.topplethenun.spoils.tiers.TierTraitRegistryImpl;
 
 import java.io.File;
@@ -46,6 +48,7 @@ public class SpoilsPluginImpl extends SpoilsPlugin {
     private MasterConfiguration settings;
     private TierManager tierManager;
     private ItemGroupManager itemGroupManager;
+    private NameTable nameTable;
 
     public static SpoilsPlugin getInstance() {
         return instance;
@@ -79,6 +82,7 @@ public class SpoilsPluginImpl extends SpoilsPlugin {
                 getResource("groups.yml"), VersionedSmartConfiguration.VersionUpdateType.BACKUP_AND_UPDATE);
         configuration.update();
 
+        nameTable = new NameTableImpl();
 
         tierManager = new TierManagerImpl();
         itemGroupManager = new ItemGroupManagerImpl();
@@ -146,6 +150,11 @@ public class SpoilsPluginImpl extends SpoilsPlugin {
         SmartYamlConfiguration configuration = new SmartYamlConfiguration(
                 new File(getDataFolder(), "groups.yml"));
         return new ItemGroupLoaderImpl(configuration);
+    }
+
+    @Override
+    public NameTable getNameTable() {
+        return nameTable;
     }
 
 }
