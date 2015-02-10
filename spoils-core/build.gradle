@@ -28,6 +28,7 @@ artifacts {
 
 license {
     header file('HEADER')
+    exclude "**/*.txt"
     ignoreFailures false
     strictCheck true
     mapping {
