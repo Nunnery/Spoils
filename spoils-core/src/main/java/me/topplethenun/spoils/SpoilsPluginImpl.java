@@ -25,10 +25,12 @@ import me.topplethenun.spoils.api.loaders.TierLoader;
 import me.topplethenun.spoils.api.managers.ItemGroupManager;
 import me.topplethenun.spoils.api.managers.TierManager;
 import me.topplethenun.spoils.api.names.NameTable;
+import me.topplethenun.spoils.api.names.NameType;
 import me.topplethenun.spoils.api.tiers.Tier;
 import me.topplethenun.spoils.api.tiers.TierTrait;
 import me.topplethenun.spoils.api.tiers.TierTraitRegistry;
 import me.topplethenun.spoils.common.io.Debugger;
+import me.topplethenun.spoils.common.io.SmartTextFile;
 import me.topplethenun.spoils.loaders.ItemGroupLoaderImpl;
 import me.topplethenun.spoils.loaders.TierLoaderImpl;
 import me.topplethenun.spoils.managers.ItemGroupManagerImpl;
@@ -84,6 +86,8 @@ public class SpoilsPluginImpl extends SpoilsPlugin {
 
         nameTable = new NameTableImpl();
 
+        loadNames();
+
         tierManager = new TierManagerImpl();
         itemGroupManager = new ItemGroupManagerImpl();
 
@@ -105,6 +109,43 @@ public class SpoilsPluginImpl extends SpoilsPlugin {
         }, 20L);
 
         debug("Enabling v" + getDescription().getVersion());
+    }
+
+    private void loadNames() {
+        getLogger().info("Loading names");
+        SmartTextFile file = new SmartTextFile(new File(getDataFolder(), "/resources/NamePartOne/generic.txt"));
+        if (!file.exists()) {
+            file.write(getResource("resources/NamePartOne/generic.txt"));
+            debug("Writing /resources/NamePartOne/generic.txt");
+        }
+        getNameTable().setAvailableNames(NameType.PART_ONE, "generic", file.read());
+        file = new SmartTextFile(new File(getDataFolder(), "/resources/NamePartTwo/generic.txt"));
+        if (!file.exists()) {
+            file.write(getResource("resources/NamePartOne/generic.txt"));
+            debug("Writing /resources/NamePartOne/generic.txt");
+        }
+        getNameTable().setAvailableNames(NameType.PART_TWO, "generic", file.read());
+
+        File namePartOneFolder = new File(getDataFolder(), "/resources/NamePartOne/");
+        for (String s : namePartOneFolder.list()) {
+            if (s.equalsIgnoreCase("generic.txt")) {
+                file = new SmartTextFile(new File(namePartOneFolder, s));
+                getNameTable().setAvailableNames(NameType.PART_ONE, s.toLowerCase(), file.read());
+            }
+        }
+
+        File namePartTwoFolder = new File(getDataFolder(), "/resources/NamePartTwo/");
+        for (String s : namePartOneFolder.list()) {
+            if (s.equalsIgnoreCase("generic.txt")) {
+                file = new SmartTextFile(new File(namePartTwoFolder, s));
+                getNameTable().setAvailableNames(NameType.PART_TWO, s.toLowerCase(), file.read());
+            }
+        }
+
+        debug("Loaded primary name files: " + getNameTable().getFileNames(NameType.PART_ONE).size(),
+                "Loaded primary names: " + getNameTable().getAmountOfLoadedNames(NameType.PART_ONE),
+                "Loaded secondary name files: " + getNameTable().getFileNames(NameType.PART_TWO).size(),
+                "Loaded secondary names: " + getNameTable().getFileNames(NameType.PART_TWO).size());
     }
 
     public void debug(Level level, String... messages) {
