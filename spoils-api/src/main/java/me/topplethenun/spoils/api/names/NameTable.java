@@ -14,19 +14,14 @@
  */
 package me.topplethenun.spoils.api.names;
 
-public enum NameType {
+import java.util.List;
 
-    PART_ONE("NamePartOne"),
-    PART_TWO("NamePartTwo");
+public interface NameTable {
 
-    private final String path;
+    List<String> getAvailableNames(NameType nameType, String fileName);
 
-    private NameType(String path) {
-        this.path = path;
-    }
+    List<String> getFileNames(NameType nameType);
 
-    public String path() {
-        return path;
-    }
+    void setAvailableNames(NameType nameType, String fileName, List<String> strings);
 
 }
