@@ -17,7 +17,8 @@ package me.topplethenun.spoils.api.names;
 public enum NameType {
 
     PART_ONE("NamePartOne"),
-    PART_TWO("NamePartTwo");
+    PART_TWO("NamePartTwo"),
+    FLAVOR_TEXT("FlavorText");
 
     private final String path;
 
