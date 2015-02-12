@@ -22,6 +22,7 @@ import me.topplethenun.spoils.api.tiers.StandardTierTrait;
 import me.topplethenun.spoils.api.tiers.Tier;
 import me.topplethenun.spoils.api.tiers.TierTrait;
 import me.topplethenun.spoils.common.enchantments.LeveledEnchantment;
+import me.topplethenun.spoils.common.utils.TextUtils;
 import me.topplethenun.spoils.tiers.TierImpl;
 import org.apache.commons.lang.Validate;
 import org.bukkit.ChatColor;
@@ -60,10 +61,10 @@ public class TierLoaderImpl implements TierLoader {
                         tier.setTraitValue(trait, cs.getString(trait.key()));
                         break;
                     case PRIMARY_COLOR:
-                        tier.setTraitValue(trait, ChatColor.valueOf(cs.getString(trait.key())));
+                        tier.setTraitValue(trait, TextUtils.convertTag(cs.getString(trait.key())));
                         break;
                     case SECONDARY_COLOR:
-                        tier.setTraitValue(trait, ChatColor.valueOf(cs.getString(trait.key())));
+                        tier.setTraitValue(trait, TextUtils.convertTag(cs.getString(trait.key())));
                         break;
                     case FLAVOR_TEXT:
                         tier.setTraitValue(trait, cs.getStringList(trait.key()));
