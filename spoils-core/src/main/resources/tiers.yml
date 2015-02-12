@@ -2,14 +2,10 @@
 version: "0.0.1"
 common:
   display-name: "Common"
-  display-color: WHITE
-  identification-color: WHITE
-  base-lore:
+  primary-color: WHITE
+  secondary-color: WHITE
+  flavor-text:
   - "<gold>More basic than a <white>white <gold>girl"
-  bonus-lore:
-  - "I hate it when people tickle my feet."
-  bonus-lore-minimum: 0
-  bonus-lore-maximum: 1
   base-enchantments:
   - DAMAGE_ALL:1:1
   bonus-enchantments:
