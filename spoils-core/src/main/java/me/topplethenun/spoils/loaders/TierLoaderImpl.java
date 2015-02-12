@@ -22,19 +22,16 @@ import me.topplethenun.spoils.api.tiers.StandardTierTrait;
 import me.topplethenun.spoils.api.tiers.Tier;
 import me.topplethenun.spoils.api.tiers.TierTrait;
 import me.topplethenun.spoils.common.enchantments.LeveledEnchantment;
-import me.topplethenun.spoils.common.utils.TextUtils;
 import me.topplethenun.spoils.tiers.TierImpl;
 import org.apache.commons.lang.Validate;
 import org.bukkit.ChatColor;
 import org.bukkit.configuration.ConfigurationSection;
 import org.bukkit.configuration.file.YamlConfiguration;
-import org.bukkit.entity.Item;
 
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
-import java.util.logging.Level;
 
 public class TierLoaderImpl implements TierLoader {
 
@@ -62,23 +59,14 @@ public class TierLoaderImpl implements TierLoader {
                     case DISPLAY_NAME:
                         tier.setTraitValue(trait, cs.getString(trait.key()));
                         break;
-                    case DISPLAY_COLOR:
+                    case PRIMARY_COLOR:
                         tier.setTraitValue(trait, ChatColor.valueOf(cs.getString(trait.key())));
                         break;
-                    case IDENTIFICATION_COLOR:
+                    case SECONDARY_COLOR:
                         tier.setTraitValue(trait, ChatColor.valueOf(cs.getString(trait.key())));
                         break;
-                    case BASE_LORE:
+                    case FLAVOR_TEXT:
                         tier.setTraitValue(trait, cs.getStringList(trait.key()));
-                        break;
-                    case BONUS_LORE:
-                        tier.setTraitValue(trait, cs.getStringList(trait.key()));
-                        break;
-                    case MINIMUM_BONUS_LORE:
-                        tier.setTraitValue(trait, cs.getInt(trait.key()));
-                        break;
-                    case MAXIMUM_BONUS_LORE:
-                        tier.setTraitValue(trait, cs.getInt(trait.key()));
                         break;
                     case BASE_ENCHANTMENTS:
                         Set<LeveledEnchantment> baseEnch = new HashSet<>();
