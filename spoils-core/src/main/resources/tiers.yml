@@ -2,12 +2,12 @@
 version: "0.0.1"
 common:
   display-name: "Common"
-  primary-color: WHITE
-  secondary-color: WHITE
+  primary-color: "&F"
+  secondary-color: "&F"
   flavor-text:
   - "<gold>More basic than a <white>white <gold>girl"
   base-enchantments:
-  - DAMAGE_ALL:1:1
+  - DAMAGE_ALL:1
   bonus-enchantments:
   - LOOT_BONUS_MOBS:1:2
   bonus-enchantments-minimum: 0
