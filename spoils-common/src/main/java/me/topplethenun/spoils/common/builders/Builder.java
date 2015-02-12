@@ -18,4 +18,6 @@ public interface Builder<T> {
 
     T build();
 
+    boolean isBuilt();
+
 }
