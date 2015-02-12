@@ -26,12 +26,9 @@ import java.util.Set;
 public enum StandardTierTrait implements TierTrait {
 
     DISPLAY_NAME("display-name", String.class, ""),
-    DISPLAY_COLOR("display-color", ChatColor.class, ChatColor.WHITE),
-    IDENTIFICATION_COLOR("identification-color", ChatColor.class, ChatColor.WHITE),
-    BASE_LORE("base-lore", List.class, new ArrayList<String>()),
-    BONUS_LORE("bonus-lore", List.class, new ArrayList<String>()),
-    MINIMUM_BONUS_LORE("bonus-lore-minimum", Integer.class, 0),
-    MAXIMUM_BONUS_LORE("bonus-lore-maximum", Integer.class, 0),
+    PRIMARY_COLOR("primary-color", ChatColor.class, ChatColor.WHITE),
+    SECONDARY_COLOR("secondary-color", ChatColor.class, ChatColor.WHITE),
+    FLAVOR_TEXT("flavor-text", List.class, new ArrayList<String>()),
     BASE_ENCHANTMENTS("base-enchantments", Set.class, new HashSet<LeveledEnchantment>()),
     BONUS_ENCHANTMENTS("bonus-enchantments", Set.class, new HashSet<LeveledEnchantment>()),
     MINIMUM_BONUS_ENCHANTMENTS("bonus-enchantments-minimum", Integer.class, 0),
