@@ -37,6 +37,11 @@ public class LeveledEnchantment {
     public static LeveledEnchantment fromString(String s) {
         Preconditions.checkNotNull(s);
         List<String> splitString = Lists.newArrayList(Splitter.on(":").omitEmptyStrings().trimResults().split(s));
+        Preconditions.checkState(splitString.size() > 1);
+        if (splitString.size() == 2) {
+            return new LeveledEnchantment(Enchantment.getByName(splitString.get(0)), NumberUtils.toInt(splitString.get
+                    (1)), NumberUtils.toInt(splitString.get(1)));
+        }
         return new LeveledEnchantment(Enchantment.getByName(splitString.get(0)),
                 NumberUtils.toInt(splitString.get(1)), NumberUtils.toInt(splitString.get(2)));
     }
