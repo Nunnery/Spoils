@@ -16,13 +16,13 @@ package me.topplethenun.spoils.api.names;
 
 import java.util.List;
 
-public interface NameTable {
+public interface ResourceTable {
 
-    List<String> getAvailableNames(NameType nameType, String fileName);
+    List<String> getAvailableResources(ResourceType resourceType, String fileName);
 
-    List<String> getFileNames(NameType nameType);
+    List<String> getFileNames(ResourceType resourceType);
 
-    void setAvailableNames(NameType nameType, String fileName, List<String> strings);
+    void setAvailableResources(ResourceType resourceType, String fileName, List<String> strings);
 
-    int getAmountOfLoadedNames(NameType nameType);
+    int getAmountOfLoadedResources(ResourceType resourceType);
 }

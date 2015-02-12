@@ -17,50 +17,50 @@ package me.topplethenun.spoils.names;
 import com.google.common.base.Preconditions;
 import com.google.common.collect.HashBasedTable;
 import com.google.common.collect.Table;
-import me.topplethenun.spoils.api.names.NameTable;
-import me.topplethenun.spoils.api.names.NameType;
+import me.topplethenun.spoils.api.names.ResourceTable;
+import me.topplethenun.spoils.api.names.ResourceType;
 
 import java.util.ArrayList;
 import java.util.List;
 
-public class NameTableImpl implements NameTable {
+public class ResourceTableImpl implements ResourceTable {
 
-    private final Table<NameType, String, List<String>> nameTable;
+    private final Table<ResourceType, String, List<String>> nameTable;
 
-    public NameTableImpl() {
+    public ResourceTableImpl() {
         this.nameTable = HashBasedTable.create();
     }
 
     @Override
-    public List<String> getAvailableNames(NameType nameType, String fileName) {
-        Preconditions.checkNotNull(nameType);
+    public List<String> getAvailableResources(ResourceType resourceType, String fileName) {
+        Preconditions.checkNotNull(resourceType);
         Preconditions.checkNotNull(fileName);
         List<String> availableNames = new ArrayList<>();
-        if (nameTable.contains(nameType, fileName)) {
-            availableNames.addAll(nameTable.get(nameType, fileName));
+        if (nameTable.contains(resourceType, fileName)) {
+            availableNames.addAll(nameTable.get(resourceType, fileName));
         }
         return availableNames;
     }
 
     @Override
-    public List<String> getFileNames(NameType nameType) {
+    public List<String> getFileNames(ResourceType resourceType) {
         return new ArrayList<>(nameTable.columnMap().keySet());
     }
 
     @Override
-    public void setAvailableNames(NameType nameType, String fileName, List<String> strings) {
-        Preconditions.checkNotNull(nameType);
+    public void setAvailableResources(ResourceType resourceType, String fileName, List<String> strings) {
+        Preconditions.checkNotNull(resourceType);
         Preconditions.checkNotNull(fileName);
         Preconditions.checkNotNull(strings);
-        nameTable.put(nameType, fileName, strings);
+        nameTable.put(resourceType, fileName, strings);
     }
 
     @Override
-    public int getAmountOfLoadedNames(NameType nameType) {
-        Preconditions.checkNotNull(nameType);
+    public int getAmountOfLoadedResources(ResourceType resourceType) {
+        Preconditions.checkNotNull(resourceType);
         int i = 0;
-        for (String s : getFileNames(nameType)) {
-            i += getAvailableNames(nameType, s).size();
+        for (String s : getFileNames(resourceType)) {
+            i += getAvailableResources(resourceType, s).size();
         }
         return i;
     }

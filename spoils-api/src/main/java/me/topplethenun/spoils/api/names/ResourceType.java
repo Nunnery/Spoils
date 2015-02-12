@@ -14,7 +14,7 @@
  */
 package me.topplethenun.spoils.api.names;
 
-public enum NameType {
+public enum ResourceType {
 
     PART_ONE("NamePartOne"),
     PART_TWO("NamePartTwo"),
@@ -22,7 +22,7 @@ public enum NameType {
 
     private final String path;
 
-    private NameType(String path) {
+    private ResourceType(String path) {
         this.path = path;
     }
 

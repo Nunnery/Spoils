@@ -24,8 +24,8 @@ import me.topplethenun.spoils.api.loaders.ItemGroupLoader;
 import me.topplethenun.spoils.api.loaders.TierLoader;
 import me.topplethenun.spoils.api.managers.ItemGroupManager;
 import me.topplethenun.spoils.api.managers.TierManager;
-import me.topplethenun.spoils.api.names.NameTable;
-import me.topplethenun.spoils.api.names.NameType;
+import me.topplethenun.spoils.api.names.ResourceTable;
+import me.topplethenun.spoils.api.names.ResourceType;
 import me.topplethenun.spoils.api.tiers.Tier;
 import me.topplethenun.spoils.api.tiers.TierTrait;
 import me.topplethenun.spoils.api.tiers.TierTraitRegistry;
@@ -35,7 +35,7 @@ import me.topplethenun.spoils.loaders.ItemGroupLoaderImpl;
 import me.topplethenun.spoils.loaders.TierLoaderImpl;
 import me.topplethenun.spoils.managers.ItemGroupManagerImpl;
 import me.topplethenun.spoils.managers.TierManagerImpl;
-import me.topplethenun.spoils.names.NameTableImpl;
+import me.topplethenun.spoils.names.ResourceTableImpl;
 import me.topplethenun.spoils.tiers.TierTraitRegistryImpl;
 import org.apache.commons.lang.StringUtils;
 
@@ -51,7 +51,7 @@ public class SpoilsPluginImpl extends SpoilsPlugin {
     private MasterConfiguration settings;
     private TierManager tierManager;
     private ItemGroupManager itemGroupManager;
-    private NameTable nameTable;
+    private ResourceTable resourceTable;
 
     public static SpoilsPlugin getInstance() {
         return instance;
@@ -85,7 +85,7 @@ public class SpoilsPluginImpl extends SpoilsPlugin {
                 getResource("groups.yml"), VersionedSmartConfiguration.VersionUpdateType.BACKUP_AND_UPDATE);
         configuration.update();
 
-        nameTable = new NameTableImpl();
+        resourceTable = new ResourceTableImpl();
 
         loadNames();
 
@@ -158,8 +158,8 @@ public class SpoilsPluginImpl extends SpoilsPlugin {
     }
 
     @Override
-    public NameTable getNameTable() {
-        return nameTable;
+    public ResourceTable getResourceTable() {
+        return resourceTable;
     }
 
     private void loadNames() {
@@ -169,25 +169,26 @@ public class SpoilsPluginImpl extends SpoilsPlugin {
             file.write(getResource("resources/NamePartOne/generic.txt"));
             debug("Writing /resources/NamePartOne/generic.txt");
         }
-        getNameTable().setAvailableNames(NameType.PART_ONE, "generic", file.read());
+        getResourceTable().setAvailableResources(ResourceType.PART_ONE, "generic", file.read());
         file = new SmartTextFile(new File(getDataFolder(), "/resources/NamePartTwo/generic.txt"));
         if (!file.exists()) {
             file.write(getResource("resources/NamePartOne/generic.txt"));
             debug("Writing /resources/NamePartTwo/generic.txt");
         }
-        getNameTable().setAvailableNames(NameType.PART_TWO, "generic", file.read());
+        getResourceTable().setAvailableResources(ResourceType.PART_TWO, "generic", file.read());
         file = new SmartTextFile(new File(getDataFolder(), "/resources/FlavorText/generic.txt"));
         if (!file.exists()) {
             file.write(getResource("resources/FlavorText/generic.txt"));
             debug("Writing /resources/FlavorText/generic.txt");
         }
-        getNameTable().setAvailableNames(NameType.FLAVOR_TEXT, "generic", file.read());
+        getResourceTable().setAvailableResources(ResourceType.FLAVOR_TEXT, "generic", file.read());
 
         File namePartOneFolder = new File(getDataFolder(), "/resources/NamePartOne/");
         for (String s : namePartOneFolder.list()) {
             if (s.equalsIgnoreCase("generic.txt") && s.endsWith(".txt")) {
                 file = new SmartTextFile(new File(namePartOneFolder, StringUtils.replace(s, ".txt", "")));
-                getNameTable().setAvailableNames(NameType.PART_ONE, StringUtils.replace(s, ".txt", "").toLowerCase(),
+                getResourceTable().setAvailableResources(ResourceType.PART_ONE,
+                        StringUtils.replace(s, ".txt", "").toLowerCase(),
                         file.read());
             }
         }
@@ -196,7 +197,8 @@ public class SpoilsPluginImpl extends SpoilsPlugin {
         for (String s : namePartOneFolder.list()) {
             if (s.equalsIgnoreCase("generic.txt") && s.endsWith(".txt")) {
                 file = new SmartTextFile(new File(namePartTwoFolder, StringUtils.replace(s, ".txt", "")));
-                getNameTable().setAvailableNames(NameType.PART_TWO, StringUtils.replace(s, ".txt", "").toLowerCase(),
+                getResourceTable().setAvailableResources(ResourceType.PART_TWO,
+                        StringUtils.replace(s, ".txt", "").toLowerCase(),
                         file.read());
             }
         }
@@ -205,15 +207,16 @@ public class SpoilsPluginImpl extends SpoilsPlugin {
         for (String s : flavorTextFolder.list()) {
             if (s.equalsIgnoreCase("generic.txt") && s.endsWith(".txt")) {
                 file = new SmartTextFile(new File(flavorTextFolder, StringUtils.replace(s, ".txt", "")));
-                getNameTable().setAvailableNames(NameType.FLAVOR_TEXT, StringUtils.replace(s, ".txt", "").toLowerCase(),
+                getResourceTable().setAvailableResources(ResourceType.FLAVOR_TEXT,
+                        StringUtils.replace(s, ".txt", "").toLowerCase(),
                         file.read());
             }
         }
 
-        debug("Loaded primary name files: " + getNameTable().getFileNames(NameType.PART_ONE).size(),
-                "Loaded primary names: " + getNameTable().getAmountOfLoadedNames(NameType.PART_ONE),
-                "Loaded secondary name files: " + getNameTable().getFileNames(NameType.PART_TWO).size(),
-                "Loaded secondary names: " + getNameTable().getFileNames(NameType.PART_TWO).size());
+        debug("Loaded primary name files: " + getResourceTable().getFileNames(ResourceType.PART_ONE).size(),
+                "Loaded primary names: " + getResourceTable().getAmountOfLoadedResources(ResourceType.PART_ONE),
+                "Loaded secondary name files: " + getResourceTable().getFileNames(ResourceType.PART_TWO).size(),
+                "Loaded secondary names: " + getResourceTable().getFileNames(ResourceType.PART_TWO).size());
     }
 
 }
