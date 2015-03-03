@@ -82,4 +82,9 @@ public class LeveledEnchantment {
                 !(enchantment != null ? !enchantment.equals(that.enchantment) : that.enchantment != null);
     }
 
+    @Override
+    public String toString() {
+        return (enchantment != null ? enchantment.getName() : "") + ":" + minimumLevel + ":" + maximumLevel;
+    }
+
 }
