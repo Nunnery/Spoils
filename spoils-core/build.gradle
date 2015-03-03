@@ -5,7 +5,7 @@ plugins {
     id "com.github.johnrengelman.shadow" version "1.2.0"
 }
 
-group = "me.topplethenun"
+group = "com.tealcube.minecraft.spigot"
 version = "0.0.1-SNAPSHOT"
 
 sourceCompatibility = 1.7
@@ -17,8 +17,8 @@ dependencies {
 
 processResources {
     filter ReplaceTokens, tokens: [
-            VERSION: version + "-" + (System.getenv("CIRCLECI") != null ? "circleci" : "compiled") + "-" + (System.getenv("CIRCLE_BUILD_NUM") ?: "0"),
-            NAME   : project.name
+            VERSION: version + "-" + (System.getenv("BUILD_NUMBER") ?: "0"),
+            NAME   : System.getenv("JOB_NAME") ?: project.name
     ]
 }
 
@@ -45,8 +45,8 @@ publishing {
     }
     repositories {
         maven {
-            url "http://repo-topplethenun.rhcloud.com/nexus/content/repositories/${project.version.endsWith('-SNAPSHOT') ? 'snapshots' : 'releases'}/"
-            name "nunnerycode-repo"
+            url "http://tealcube.com/nexus/content/repositories/${project.version.endsWith('-SNAPSHOT') ? 'snapshots' : 'releases'}/"
+            name "TealCube"
             credentials {
                 username System.getenv("nexusUsername") ?: nexusUsername
                 password System.getenv("nexusPassword") ?: nexusPassword

@@ -11,7 +11,7 @@ subprojects {
             url "https://hub.spigotmc.org/nexus/content/groups/public/"
         }
         maven {
-            url "http://repo-topplethenun.rhcloud.com/nexus/content/groups/public/"
+            url "http://tealcube.com/nexus/content/groups/public/"
         }
     }
 }

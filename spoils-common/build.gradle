@@ -3,7 +3,7 @@ plugins {
     id "com.github.johnrengelman.shadow" version "1.2.0"
 }
 
-group = "me.topplethenun"
+group = "com.tealcube.minecraft.spigot"
 version = "0.0.1-SNAPSHOT"
 
 sourceCompatibility = 1.7
@@ -12,8 +12,8 @@ dependencies {
     compile("org.spigotmc:spigot-api:1.8-R0.1-SNAPSHOT") {
         exclude group: "net.md-5"
     }
-    compile "me.topplethenun:hilt:latest.integration"
-    compile "me.topplethenun:config:latest.integration"
+    compile "com.tealcube.minecraft.bukkit:hilt:1.0.0-SNAPSHOT"
+    compile "com.tealcube.minecraft.bukkit:config:1.0.0-SNAPSHOT"
 }
 
 license {
@@ -38,8 +38,8 @@ publishing {
     }
     repositories {
         maven {
-            url "http://repo-topplethenun.rhcloud.com/nexus/content/repositories/${project.version.endsWith('-SNAPSHOT') ? 'snapshots' : 'releases'}/"
-            name "nunnerycode-repo"
+            url "http://tealcube.com/nexus/content/repositories/${project.version.endsWith('-SNAPSHOT') ? 'snapshots' : 'releases'}/"
+            name "TealCube"
             credentials {
                 username System.getenv("nexusUsername") ?: nexusUsername
                 password System.getenv("nexusPassword") ?: nexusPassword
@@ -52,7 +52,6 @@ shadowJar {
     classifier ""
 
     dependencies {
-        include(dependency("me.topplethenun:config"))
-        include(dependency("me.topplethenun:hilt"))
+        exclude(dependency("org.spigotmc:spigot-api"))
     }
 }

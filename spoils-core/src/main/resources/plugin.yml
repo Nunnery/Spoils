@@ -1,3 +1,3 @@
 name: @NAME@
 version: @VERSION@
-main: me.topplethenun.spoils.SpoilsPluginImpl
+main: com.tealcube.minecraft.spigot.spoils.SpoilsPluginImpl
