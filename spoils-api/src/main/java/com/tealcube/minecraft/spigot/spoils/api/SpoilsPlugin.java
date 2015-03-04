@@ -15,6 +15,7 @@
 package com.tealcube.minecraft.spigot.spoils.api;
 
 import com.tealcube.minecraft.bukkit.config.MasterConfiguration;
+import com.tealcube.minecraft.spigot.spoils.api.builders.ItemBuilder;
 import com.tealcube.minecraft.spigot.spoils.api.loaders.ItemGroupLoader;
 import com.tealcube.minecraft.spigot.spoils.api.loaders.TierLoader;
 import com.tealcube.minecraft.spigot.spoils.api.managers.ItemGroupManager;
@@ -73,5 +74,7 @@ public abstract class SpoilsPlugin extends JavaPlugin {
     public abstract ResourceTable getResourceTable();
 
     public abstract CommandHandler getCommandHandler();
+
+    public abstract ItemBuilder getNewItemBuilder();
 
 }
