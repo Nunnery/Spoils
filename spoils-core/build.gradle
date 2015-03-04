@@ -13,6 +13,7 @@ sourceCompatibility = 1.7
 dependencies {
     compile project(":spoils-common")
     compile project(":spoils-api")
+    compile "se.ranzdo.bukkit:methodcommand:0.2-SNAPSHOT"
 }
 
 processResources {
