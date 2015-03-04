@@ -22,6 +22,7 @@ import com.tealcube.minecraft.spigot.spoils.api.managers.TierManager;
 import com.tealcube.minecraft.spigot.spoils.api.names.ResourceTable;
 import com.tealcube.minecraft.spigot.spoils.api.tiers.TierTraitRegistry;
 import org.bukkit.plugin.java.JavaPlugin;
+import se.ranzdo.bukkit.methodcommand.CommandHandler;
 
 import java.util.logging.Level;
 
@@ -70,5 +71,7 @@ public abstract class SpoilsPlugin extends JavaPlugin {
     public abstract ItemGroupLoader getNewItemGroupLoader();
 
     public abstract ResourceTable getResourceTable();
+
+    public abstract CommandHandler getCommandHandler();
 
 }

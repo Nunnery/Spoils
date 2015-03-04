@@ -38,6 +38,7 @@ import com.tealcube.minecraft.spigot.spoils.managers.TierManagerImpl;
 import com.tealcube.minecraft.spigot.spoils.names.ResourceTableImpl;
 import com.tealcube.minecraft.spigot.spoils.tiers.TierTraitRegistryImpl;
 import org.apache.commons.lang.StringUtils;
+import se.ranzdo.bukkit.methodcommand.CommandHandler;
 
 import java.io.File;
 import java.util.Set;
@@ -52,6 +53,7 @@ public class SpoilsPluginImpl extends SpoilsPlugin {
     private TierManager tierManager;
     private ItemGroupManager itemGroupManager;
     private ResourceTable resourceTable;
+    private CommandHandler commandHandler;
 
     public static SpoilsPlugin getInstance() {
         return instance;
@@ -108,6 +110,8 @@ public class SpoilsPluginImpl extends SpoilsPlugin {
                 debug("Loaded tiers: " + tierSet.size());
             }
         }, 20L);
+
+        commandHandler = new CommandHandler(this);
 
         debug("Enabling v" + getDescription().getVersion());
     }
@@ -219,6 +223,11 @@ public class SpoilsPluginImpl extends SpoilsPlugin {
                 "Loaded secondary names: " + getResourceTable().getFileNames(ResourceType.PART_TWO).size(),
                 "Loaded flavor texts: " + getResourceTable().getAmountOfLoadedResources(ResourceType.FLAVOR_TEXT),
                 "Loaded flavor text files: " + getResourceTable().getFileNames(ResourceType.FLAVOR_TEXT).size());
+    }
+
+    @Override
+    public CommandHandler getCommandHandler() {
+        return commandHandler;
     }
 
 }
