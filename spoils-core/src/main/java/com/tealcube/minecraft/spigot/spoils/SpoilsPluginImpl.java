@@ -31,6 +31,7 @@ import com.tealcube.minecraft.spigot.spoils.api.tiers.Tier;
 import com.tealcube.minecraft.spigot.spoils.api.tiers.TierTrait;
 import com.tealcube.minecraft.spigot.spoils.api.tiers.TierTraitRegistry;
 import com.tealcube.minecraft.spigot.spoils.builders.ItemBuilderImpl;
+import com.tealcube.minecraft.spigot.spoils.commands.SpoilsCommand;
 import com.tealcube.minecraft.spigot.spoils.common.io.Debugger;
 import com.tealcube.minecraft.spigot.spoils.common.io.SmartTextFile;
 import com.tealcube.minecraft.spigot.spoils.loaders.ItemGroupLoaderImpl;
@@ -114,6 +115,7 @@ public class SpoilsPluginImpl extends SpoilsPlugin {
         }, 20L);
 
         commandHandler = new CommandHandler(this);
+        commandHandler.registerCommands(new SpoilsCommand(this));
 
         debug("Enabling v" + getDescription().getVersion());
     }
