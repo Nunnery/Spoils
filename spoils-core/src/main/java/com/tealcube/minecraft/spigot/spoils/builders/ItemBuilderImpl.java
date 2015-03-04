@@ -15,6 +15,7 @@
 package com.tealcube.minecraft.spigot.spoils.builders;
 
 import com.google.common.base.Preconditions;
+import com.google.common.base.Splitter;
 import com.tealcube.minecraft.bukkit.hilt.HiltItemStack;
 import com.tealcube.minecraft.spigot.spoils.api.SpoilsPlugin;
 import com.tealcube.minecraft.spigot.spoils.api.builders.ItemBuilder;
@@ -77,10 +78,14 @@ public class ItemBuilderImpl implements ItemBuilder {
 
         String name = TextUtils.color(String.format("%s%s %s%s", tier.getTraitValue(StandardTierTrait.PRIMARY_COLOR),
                 namePartOne, namePartTwo, tier.getTraitValue(StandardTierTrait.SECONDARY_COLOR)));
-
         itemStack.setName(name);
 
-        itemStack.setLore((List<String>) tier.getTraitValue(StandardTierTrait.FLAVOR_TEXT));
+        List<String> lore = new ArrayList<>();
+        List<String> flavorText = (List<String>) tier.getTraitValue(StandardTierTrait.FLAVOR_TEXT);
+        String s = flavorText.get(random.nextInt(flavorText.size()));
+        List<String> toAdd = Splitter.on("/n").omitEmptyStrings().splitToList(s);
+        lore.addAll(TextUtils.color(toAdd));
+        itemStack.setLore(lore);
 
         built = true;
         return itemStack;
