@@ -1,3 +1,11 @@
 name: @NAME@
 version: @VERSION@
 main: com.tealcube.minecraft.spigot.spoils.SpoilsPluginImpl
+
+commands:
+  spoils:
+    aliases: [sp]
+
+permissions:
+  spoils.command.summon:
+    default: op
