@@ -19,6 +19,7 @@ import com.tealcube.minecraft.bukkit.config.SmartYamlConfiguration;
 import com.tealcube.minecraft.bukkit.config.VersionedSmartConfiguration;
 import com.tealcube.minecraft.bukkit.config.VersionedSmartYamlConfiguration;
 import com.tealcube.minecraft.spigot.spoils.api.SpoilsPlugin;
+import com.tealcube.minecraft.spigot.spoils.api.builders.ItemBuilder;
 import com.tealcube.minecraft.spigot.spoils.api.items.ItemGroup;
 import com.tealcube.minecraft.spigot.spoils.api.loaders.ItemGroupLoader;
 import com.tealcube.minecraft.spigot.spoils.api.loaders.TierLoader;
@@ -29,6 +30,7 @@ import com.tealcube.minecraft.spigot.spoils.api.names.ResourceType;
 import com.tealcube.minecraft.spigot.spoils.api.tiers.Tier;
 import com.tealcube.minecraft.spigot.spoils.api.tiers.TierTrait;
 import com.tealcube.minecraft.spigot.spoils.api.tiers.TierTraitRegistry;
+import com.tealcube.minecraft.spigot.spoils.builders.ItemBuilderImpl;
 import com.tealcube.minecraft.spigot.spoils.common.io.Debugger;
 import com.tealcube.minecraft.spigot.spoils.common.io.SmartTextFile;
 import com.tealcube.minecraft.spigot.spoils.loaders.ItemGroupLoaderImpl;
@@ -228,6 +230,11 @@ public class SpoilsPluginImpl extends SpoilsPlugin {
     @Override
     public CommandHandler getCommandHandler() {
         return commandHandler;
+    }
+
+    @Override
+    public ItemBuilder getNewItemBuilder() {
+        return new ItemBuilderImpl(this);
     }
 
 }
