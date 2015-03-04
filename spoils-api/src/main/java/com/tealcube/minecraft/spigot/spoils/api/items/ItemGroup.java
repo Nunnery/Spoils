@@ -37,12 +37,9 @@ public interface ItemGroup {
         UNKNOWN("");
 
         private final String path;
+
         private Type(String path) {
             this.path = path;
-        }
-
-        public String getPath() {
-            return path;
         }
 
         public static Type fromString(String s) {
@@ -52,6 +49,10 @@ public interface ItemGroup {
                 }
             }
             return UNKNOWN;
+        }
+
+        public String getPath() {
+            return path;
         }
     }
 

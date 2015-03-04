@@ -96,23 +96,6 @@ public class ItemBuilderImpl implements ItemBuilder {
         return built;
     }
 
-    @Override
-    public ItemBuilder withMaterial(Material material) {
-        Preconditions.checkNotNull(material);
-        Preconditions.checkState(!isBuilt());
-        Preconditions.checkArgument(material != Material.AIR);
-        this.material = material;
-        return this;
-    }
-
-    @Override
-    public ItemBuilder withTier(Tier tier) {
-        Preconditions.checkNotNull(tier);
-        Preconditions.checkState(!isBuilt());
-        this.tier = tier;
-        return this;
-    }
-
     @SuppressWarnings("unchecked")
     private Material calculateMaterial() {
         Random random = new SpoilsRandom();
@@ -133,6 +116,23 @@ public class ItemBuilderImpl implements ItemBuilder {
             materialList.removeAll(itemGroup.getMaterials());
         }
         return materialList.get(random.nextInt(materialList.size()));
+    }
+
+    @Override
+    public ItemBuilder withMaterial(Material material) {
+        Preconditions.checkNotNull(material);
+        Preconditions.checkState(!isBuilt());
+        Preconditions.checkArgument(material != Material.AIR);
+        this.material = material;
+        return this;
+    }
+
+    @Override
+    public ItemBuilder withTier(Tier tier) {
+        Preconditions.checkNotNull(tier);
+        Preconditions.checkState(!isBuilt());
+        this.tier = tier;
+        return this;
     }
 
 }

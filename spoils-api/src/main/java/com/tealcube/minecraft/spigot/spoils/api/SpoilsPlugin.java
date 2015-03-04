@@ -29,31 +29,36 @@ public abstract class SpoilsPlugin extends JavaPlugin {
 
     /**
      * Writes debug messages to the plugin's debug log using the given {@link java.util.logging.Level}.
-     * @param level Level of logging
+     *
+     * @param level    Level of logging
      * @param messages messages to write
      */
     public abstract void debug(Level level, String... messages);
 
     /**
      * Writes debug messages to the plugin's debug log using {@link java.util.logging.Level#INFO}.
+     *
      * @param messages messages to write
      */
     public abstract void debug(String... messages);
 
     /**
      * Gets and returns the MasterConfiguration for this instance.
+     *
      * @return MasterConfiguration
      */
     public abstract MasterConfiguration getSettings();
 
     /**
      * Gets and returns the TierTraitRegistry for this instance.
+     *
      * @return TierTraitRegistry
      */
     public abstract TierTraitRegistry getTierTraitRegistry();
 
     /**
      * Gets and returns the TierManager for this instance.
+     *
      * @return TierManager
      */
     public abstract TierManager getTierManager();

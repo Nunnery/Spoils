@@ -16,7 +16,6 @@ package com.tealcube.minecraft.spigot.spoils.loaders;
 
 import com.google.common.base.Optional;
 import com.tealcube.minecraft.spigot.spoils.SpoilsPluginImpl;
-import com.tealcube.minecraft.spigot.spoils.tiers.TierImpl;
 import com.tealcube.minecraft.spigot.spoils.api.items.ItemGroup;
 import com.tealcube.minecraft.spigot.spoils.api.loaders.TierLoader;
 import com.tealcube.minecraft.spigot.spoils.api.tiers.StandardTierTrait;
@@ -24,6 +23,7 @@ import com.tealcube.minecraft.spigot.spoils.api.tiers.Tier;
 import com.tealcube.minecraft.spigot.spoils.api.tiers.TierTrait;
 import com.tealcube.minecraft.spigot.spoils.common.enchantments.LeveledEnchantment;
 import com.tealcube.minecraft.spigot.spoils.common.utils.TextUtils;
+import com.tealcube.minecraft.spigot.spoils.tiers.TierImpl;
 import org.apache.commons.lang.Validate;
 import org.bukkit.configuration.ConfigurationSection;
 import org.bukkit.configuration.file.YamlConfiguration;

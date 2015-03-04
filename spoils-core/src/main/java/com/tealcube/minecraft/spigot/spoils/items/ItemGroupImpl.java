@@ -46,6 +46,16 @@ public class ItemGroupImpl implements ItemGroup {
     }
 
     @Override
+    public String getName() {
+        return name;
+    }
+
+    @Override
+    public Type getType() {
+        return type;
+    }
+
+    @Override
     public Set<Material> getMaterials() {
         return materials;
     }
@@ -61,13 +71,8 @@ public class ItemGroupImpl implements ItemGroup {
     }
 
     @Override
-    public Type getType() {
-        return type;
-    }
-
-    @Override
-    public String getName() {
-        return name;
+    public int hashCode() {
+        return name != null ? name.hashCode() : 0;
     }
 
     @Override
@@ -82,10 +87,5 @@ public class ItemGroupImpl implements ItemGroup {
         ItemGroupImpl itemGroup = (ItemGroupImpl) o;
 
         return !(name != null ? !name.equals(itemGroup.name) : itemGroup.name != null);
-    }
-
-    @Override
-    public int hashCode() {
-        return name != null ? name.hashCode() : 0;
     }
 }
