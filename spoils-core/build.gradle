@@ -58,7 +58,6 @@ publishing {
 shadowJar {
     dependencies {
         include project(path: ":spoils-common", configuration: "shadow")
-        include project(":spoils-api")
-        include "se.ranzdo.bukkit:methodcommand"
+        include project(path: ":spoils-api", configuration: "shadow")
     }
 }
