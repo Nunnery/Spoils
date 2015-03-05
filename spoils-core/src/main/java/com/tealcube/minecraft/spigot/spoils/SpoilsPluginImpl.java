@@ -193,7 +193,7 @@ public class SpoilsPluginImpl extends SpoilsPlugin {
 
         File namePartOneFolder = new File(getDataFolder(), "/resources/NamePartOne/");
         for (String s : namePartOneFolder.list()) {
-            if (s.equalsIgnoreCase("generic.txt") && s.endsWith(".txt")) {
+            if (!s.equalsIgnoreCase("generic.txt") && s.endsWith(".txt")) {
                 file = new SmartTextFile(new File(namePartOneFolder, StringUtils.replace(s, ".txt", "")));
                 getResourceTable().setAvailableResources(ResourceType.PART_ONE,
                         StringUtils.replace(s, ".txt", "").toLowerCase(),
@@ -203,7 +203,7 @@ public class SpoilsPluginImpl extends SpoilsPlugin {
 
         File namePartTwoFolder = new File(getDataFolder(), "/resources/NamePartTwo/");
         for (String s : namePartOneFolder.list()) {
-            if (s.equalsIgnoreCase("generic.txt") && s.endsWith(".txt")) {
+            if (!s.equalsIgnoreCase("generic.txt") && s.endsWith(".txt")) {
                 file = new SmartTextFile(new File(namePartTwoFolder, StringUtils.replace(s, ".txt", "")));
                 getResourceTable().setAvailableResources(ResourceType.PART_TWO,
                         StringUtils.replace(s, ".txt", "").toLowerCase(),
@@ -213,7 +213,7 @@ public class SpoilsPluginImpl extends SpoilsPlugin {
 
         File flavorTextFolder = new File(getDataFolder(), "/resources/FlavorText/");
         for (String s : flavorTextFolder.list()) {
-            if (s.equalsIgnoreCase("generic.txt") && s.endsWith(".txt")) {
+            if (!s.equalsIgnoreCase("generic.txt") && s.endsWith(".txt")) {
                 file = new SmartTextFile(new File(flavorTextFolder, StringUtils.replace(s, ".txt", "")));
                 getResourceTable().setAvailableResources(ResourceType.FLAVOR_TEXT,
                         StringUtils.replace(s, ".txt", "").toLowerCase(),
