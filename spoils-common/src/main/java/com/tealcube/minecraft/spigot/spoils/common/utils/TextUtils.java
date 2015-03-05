@@ -29,7 +29,8 @@ public final class TextUtils {
 
     static {
         for (ChatColor cc : ChatColor.values()) {
-            COLOR_MAP.put("&" + cc.getChar(), cc);
+            COLOR_MAP.put("&" + String.valueOf(cc.getChar()).toLowerCase(), cc);
+            COLOR_MAP.put("&" + String.valueOf(cc.getChar()).toUpperCase(), cc);
             COLOR_MAP.put("<" + cc.name().toUpperCase() + ">", cc);
             COLOR_MAP.put("<" + cc.name().toLowerCase() + ">", cc);
             COLOR_MAP.put("<" + cc.name().toUpperCase().replace("_", "") + ">", cc);
