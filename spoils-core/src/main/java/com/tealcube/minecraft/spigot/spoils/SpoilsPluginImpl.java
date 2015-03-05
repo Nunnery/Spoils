@@ -180,7 +180,7 @@ public class SpoilsPluginImpl extends SpoilsPlugin {
         getResourceTable().setAvailableResources(ResourceType.PART_ONE, "generic", file.read());
         file = new SmartTextFile(new File(getDataFolder(), "/resources/NamePartTwo/generic.txt"));
         if (!file.exists()) {
-            file.write(getResource("resources/NamePartOne/generic.txt"));
+            file.write(getResource("resources/NamePartTwo/generic.txt"));
             debug("Writing /resources/NamePartTwo/generic.txt");
         }
         getResourceTable().setAvailableResources(ResourceType.PART_TWO, "generic", file.read());
