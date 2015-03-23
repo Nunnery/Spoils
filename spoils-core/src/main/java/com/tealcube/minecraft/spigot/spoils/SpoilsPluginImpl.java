@@ -57,6 +57,7 @@ public class SpoilsPluginImpl extends SpoilsPlugin {
     private ItemGroupManager itemGroupManager;
     private ResourceTable resourceTable;
     private CommandHandler commandHandler;
+    private boolean valid;
 
     public static SpoilsPlugin getInstance() {
         return instance;
@@ -72,6 +73,7 @@ public class SpoilsPluginImpl extends SpoilsPlugin {
 
     @Override
     public void onEnable() {
+        valid = true;
         instance = this;
         debugger = new Debugger(new File(getDataFolder(), "debug.log"));
         tierTraitRegistry = new TierTraitRegistryImpl();
@@ -237,6 +239,16 @@ public class SpoilsPluginImpl extends SpoilsPlugin {
     @Override
     public ItemBuilder getNewItemBuilder() {
         return new ItemBuilderImpl(this);
+    }
+
+    @Override
+    public boolean isValid() {
+        return valid;
+    }
+
+    @Override
+    public void setValid(boolean valid) {
+        this.valid = valid;
     }
 
 }
