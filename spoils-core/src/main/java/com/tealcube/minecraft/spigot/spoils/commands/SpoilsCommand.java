@@ -38,7 +38,7 @@ public class SpoilsCommand {
         this.random = new SpoilsRandom();
     }
 
-    @Command(identifier = "spoils summon", permissions = "spoils.command.summon", onlyPlayers = false)
+    @Command(identifier = "spoils summon tier", permissions = "spoils.command.summon", onlyPlayers = false)
     @Flags(identifier = {"a", "t"}, description = {"amount of items", "tier of items"})
     public void summonSubcommand(CommandSender sender, @Arg(name = "target", def = "?sender") Player target,
                                  @FlagArg("a") @Arg(name = "amount", def = "1", verifiers = "min[1]") int amount,
