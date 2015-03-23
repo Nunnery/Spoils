@@ -58,6 +58,7 @@ public class SpoilsPluginImpl extends SpoilsPlugin {
     private ResourceTable resourceTable;
     private CommandHandler commandHandler;
     private boolean valid;
+    private String invalidationReason;
 
     public static SpoilsPlugin getInstance() {
         return instance;
@@ -249,6 +250,16 @@ public class SpoilsPluginImpl extends SpoilsPlugin {
     @Override
     public void setValid(boolean valid) {
         this.valid = valid;
+    }
+
+    @Override
+    public String getInvalidationReason() {
+        return invalidationReason != null ? invalidationReason : "";
+    }
+
+    @Override
+    public void setInvalidationReason(String invalidationReason) {
+        this.invalidationReason = invalidationReason;
     }
 
 }

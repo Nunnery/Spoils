@@ -81,4 +81,8 @@ public abstract class SpoilsPlugin extends JavaPlugin {
 
     public abstract void setValid(boolean b);
 
+    public abstract String getInvalidationReason();
+
+    public abstract void setInvalidationReason(String s);
+
 }
