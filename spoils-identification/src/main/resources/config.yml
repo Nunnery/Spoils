@@ -1,0 +1,11 @@
+version: "0.0.1"
+identity-tome:
+  name: "<darkpurple>Identity Tome"
+  lore:
+  - "<white>Drop this on an Unidentified Item"
+  - "<white>in your inventory to identify it!"
+unidentified-item:
+  name: "<white>Unidentified Item"
+  lore:
+  - "<white>Drop an <darkpurple>Identity Tome<white> on"
+  - "<white>this in your inventory to identify this."
