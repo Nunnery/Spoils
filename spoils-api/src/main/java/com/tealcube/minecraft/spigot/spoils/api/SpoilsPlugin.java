@@ -77,4 +77,8 @@ public abstract class SpoilsPlugin extends JavaPlugin {
 
     public abstract ItemBuilder getNewItemBuilder();
 
+    public abstract boolean isValid();
+
+    public abstract void setValid(boolean b);
+
 }
