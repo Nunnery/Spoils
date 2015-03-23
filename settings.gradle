@@ -1,1 +1,1 @@
-include "spoils-common", "spoils-api", "spoils-core"
+include "spoils-common", "spoils-api", "spoils-core", "spoils-identification"
