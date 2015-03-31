@@ -57,7 +57,7 @@ public class IdentificationListener implements Listener {
         }
 
         Material m = currentItem.getType();
-        currentItem = identification.getSpoilsPlugin().getNewItemBuilder().withMaterial(m).withTier(identification.getTierIdentificationChance())
+        currentItem = identification.getSpoilsPlugin().getNewItemBuilder().withMaterial(m).withTier(identification.getRandomTierFromIdentificationChance())
                 .build();
 
         MessageUtils.sendMessage(event.getWhoClicked(), "<green>You successfully identified your item!");

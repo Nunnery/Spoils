@@ -59,6 +59,7 @@ public class SpoilsIdentification extends JavaPlugin {
         settings = MasterConfiguration.loadFromFiles(configYAML);
 
         this.spoilsPlugin.getTierTraitRegistry().register(IdentificationTierTrait.IDENTIFICATION_CHANCE);
+        this.spoilsPlugin.getCommandHandler().registerCommands(this);
 
         getServer().getScheduler().scheduleSyncDelayedTask(this, new Runnable() {
             @Override
@@ -123,7 +124,7 @@ public class SpoilsIdentification extends JavaPlugin {
         return settings;
     }
 
-    public Tier getTierIdentificationChance() {
+    public Tier getRandomTierFromIdentificationChance() {
         double amount = random.nextDouble() * 100;
         double curAmount = 0D;
         Set<Tier> tiers = new HashSet<>(spoilsPlugin.getTierManager().getManaged());
