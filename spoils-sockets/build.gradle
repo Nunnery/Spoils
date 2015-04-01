@@ -1,0 +1,50 @@
+import org.apache.tools.ant.filters.ReplaceTokens
+
+plugins {
+    id "com.github.hierynomus.license" version "0.11.0"
+}
+
+group = "com.tealcube.minecraft.spigot"
+version = "0.0.1-SNAPSHOT"
+
+sourceCompatibility = 1.7
+
+dependencies {
+    compile project(":spoils-api")
+}
+
+processResources {
+    filter ReplaceTokens, tokens: [
+            VERSION: version + "-" + (System.getenv("BUILD_NUMBER") ?: "0"),
+            NAME   : project.name
+    ]
+}
+
+license {
+    header file('HEADER')
+    exclude "**/*.txt"
+    ignoreFailures false
+    strictCheck true
+    mapping {
+        java = 'SLASHSTAR_STYLE'
+    }
+}
+
+publishing {
+    publications {
+        java(MavenPublication) {
+            artifactId = "spoils-sockets"
+            from components.java
+        }
+    }
+    repositories {
+        maven {
+            url "http://tealcube.com/nexus/content/repositories/${project.version.endsWith('-SNAPSHOT') ? 'snapshots' : 'releases'}/"
+            name "TealCube"
+            credentials {
+                username System.getenv("nexusUsername") ?: nexusUsername
+                password System.getenv("nexusPassword") ?: nexusPassword
+            }
+        }
+    }
+}
