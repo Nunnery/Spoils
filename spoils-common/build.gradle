@@ -12,7 +12,7 @@ dependencies {
     compile("org.spigotmc:spigot-api:1.8-R0.1-SNAPSHOT") {
         exclude group: "net.md-5"
     }
-    compile "com.tealcube.minecraft.bukkit:hilt:1.0.0-SNAPSHOT"
+    compile "com.tealcube.minecraft.bukkit:hilt:1.0.0"
     compile "com.tealcube.minecraft.bukkit:config:1.0.0-SNAPSHOT"
 }
 
