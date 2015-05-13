@@ -30,7 +30,7 @@ publishing {
     publications {
         java(MavenPublication) {
             artifactId = "spoils-api"
-            from components.java
+            from components.shadow
         }
     }
     repositories {
