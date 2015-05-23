@@ -1,0 +1,4 @@
+name: @NAME@
+version: @VERSION@
+main: com.tealcube.minecraft.bukkit.spoils.sockets.SpoilsSockets
+depend: [spoils-core]
