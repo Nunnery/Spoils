@@ -19,7 +19,6 @@ import com.tealcube.minecraft.bukkit.config.VersionedSmartConfiguration;
 import com.tealcube.minecraft.bukkit.config.VersionedSmartYamlConfiguration;
 import com.tealcube.minecraft.spigot.spoils.api.SpoilsPlugin;
 import com.tealcube.minecraft.spigot.spoils.api.tiers.Tier;
-import com.tealcube.minecraft.spigot.spoils.common.io.Debugger;
 import com.tealcube.minecraft.spigot.spoils.common.math.SpoilsRandom;
 import com.tealcube.minecraft.spigot.spoils.common.utils.MessageUtils;
 import org.bukkit.Material;
@@ -27,6 +26,8 @@ import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 import org.bukkit.event.HandlerList;
 import org.bukkit.plugin.java.JavaPlugin;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import se.ranzdo.bukkit.methodcommand.Arg;
 import se.ranzdo.bukkit.methodcommand.Command;
 import se.ranzdo.bukkit.methodcommand.FlagArg;
@@ -35,25 +36,24 @@ import se.ranzdo.bukkit.methodcommand.Flags;
 import java.io.File;
 import java.util.HashSet;
 import java.util.Set;
-import java.util.logging.Level;
 
 public class SpoilsIdentification extends JavaPlugin {
 
+    private static Logger logger;
     private MasterConfiguration settings;
-    private Debugger debugger;
     private SpoilsPlugin spoilsPlugin;
     private SpoilsRandom random;
 
     @Override
     public void onEnable() {
+        logger = LoggerFactory.getLogger(SpoilsIdentification.class);
         random = new SpoilsRandom();
         this.spoilsPlugin = (SpoilsPlugin) getServer().getPluginManager().getPlugin("spoils-core");
-        this.debugger = new Debugger(new File(getDataFolder(), "debug.log"));
 
         VersionedSmartYamlConfiguration configYAML = new VersionedSmartYamlConfiguration(new File(getDataFolder(), "config.yml"), getResource
                 ("config.yml"), VersionedSmartConfiguration.VersionUpdateType.BACKUP_AND_UPDATE);
         if (configYAML.update()) {
-            debug("Updating config.yml");
+            logger.info("Updating config.yml");
         }
 
         settings = MasterConfiguration.loadFromFiles(configYAML);
@@ -69,7 +69,7 @@ public class SpoilsIdentification extends JavaPlugin {
                     amount += (double) t.getTraitValue(IdentificationTierTrait.IDENTIFICATION_CHANCE);
                 }
                 if (amount > 100D) {
-                    debug("Identification chance does not add up to 100");
+                    logger.info("Identification chance does not add up to 100");
                     spoilsPlugin.setInvalidationReason("Identification chance does not add up to 100");
                     spoilsPlugin.setValid(false);
                 }
@@ -80,7 +80,7 @@ public class SpoilsIdentification extends JavaPlugin {
             @Override
             public void run() {
                 if (!spoilsPlugin.isValid()) {
-                    debug("Parent plugin is invalid, disabling");
+                    logger.info("Parent plugin is invalid, disabling");
                     getServer().getPluginManager().disablePlugin(SpoilsIdentification.this);
                 }
             }
@@ -88,31 +88,12 @@ public class SpoilsIdentification extends JavaPlugin {
 
         getServer().getPluginManager().registerEvents(new IdentificationListener(this), this);
 
-        debug("Enabling " + getDescription().getName() + " v" + getDescription().getVersion());
+        logger.info("Enabling " + getDescription().getName() + " v" + getDescription().getVersion());
     }
 
     @Override
     public void onDisable() {
         HandlerList.unregisterAll(this);
-    }
-
-    /**
-     * Writes debug messages to the plugin's debug log using the given {@link java.util.logging.Level}.
-     *
-     * @param level    Level of logging
-     * @param messages messages to write
-     */
-    public void debug(Level level, String... messages) {
-        this.debugger.debug(level, messages);
-    }
-
-    /**
-     * Writes debug messages to the plugin's debug log using {@link java.util.logging.Level#INFO}.
-     *
-     * @param messages messages to write
-     */
-    public void debug(String... messages) {
-        debug(Level.INFO, messages);
     }
 
     /**

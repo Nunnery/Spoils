@@ -24,7 +24,7 @@ public enum IdentificationTierTrait implements TierTrait {
     private final Class valueClass;
     private final Object defaultValue;
 
-    private IdentificationTierTrait(String key, Class valueClass, Object defaultValue) {
+    IdentificationTierTrait(String key, Class valueClass, Object defaultValue) {
         this.key = key;
         this.valueClass = valueClass;
         this.defaultValue = defaultValue;
