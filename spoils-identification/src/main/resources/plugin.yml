@@ -1,4 +1,4 @@
 name: @NAME@
 version: @VERSION@
-main: com.tealcube.minecraft.bukkit.spoils.identification.SpoilsIdentification
+main: com.tealcube.minecraft.spigot.spoils.identification.SpoilsIdentification
 depend: [spoils-core]

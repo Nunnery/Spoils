@@ -12,9 +12,10 @@
  * ACTION OF CONTRACT, NEGLIGENCE OR OTHER TORTIOUS ACTION, ARISING OUT OF OR IN CONNECTION WITH THE USE OR PERFORMANCE OF
  * THIS SOFTWARE.
  */
-package com.tealcube.minecraft.bukkit.spoils.identification;
+package com.tealcube.minecraft.spigot.spoils.identification;
 
 import com.tealcube.minecraft.bukkit.hilt.HiltItemStack;
+import com.tealcube.minecraft.bukkit.spoils.identification.SpoilsIdentification;
 import com.tealcube.minecraft.spigot.spoils.common.utils.MessageUtils;
 import com.tealcube.minecraft.spigot.spoils.common.utils.TextUtils;
 import org.bukkit.Material;

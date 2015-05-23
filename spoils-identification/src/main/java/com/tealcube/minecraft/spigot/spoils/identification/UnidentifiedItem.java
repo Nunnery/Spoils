@@ -12,15 +12,19 @@
  * ACTION OF CONTRACT, NEGLIGENCE OR OTHER TORTIOUS ACTION, ARISING OUT OF OR IN CONNECTION WITH THE USE OR PERFORMANCE OF
  * THIS SOFTWARE.
  */
-package com.tealcube.minecraft.bukkit.spoils.identification;
+package com.tealcube.minecraft.spigot.spoils.identification;
 
-import com.tealcube.minecraft.bukkit.hilt.HiltBook;
+import com.tealcube.minecraft.bukkit.hilt.HiltItemStack;
+import com.tealcube.minecraft.bukkit.spoils.identification.SpoilsIdentification;
 import com.tealcube.minecraft.spigot.spoils.common.utils.TextUtils;
+import org.bukkit.Material;
 
-public class IdentityTome extends HiltBook {
-    public IdentityTome(SpoilsIdentification identification) {
-        super(TomeType.WRITTEN_BOOK);
-        setName(TextUtils.color(identification.getSettings().getString("config.identity-tome.name")));
-        setLore(TextUtils.color(identification.getSettings().getStringList("config.identity-tome.lore")));
+public class UnidentifiedItem extends HiltItemStack {
+
+    public UnidentifiedItem(SpoilsIdentification identification, Material material) {
+        super(material);
+        setName(TextUtils.color(identification.getSettings().getString("config.unidentified-item.name")));
+        setLore(TextUtils.color(identification.getSettings().getStringList("config.unidentified-item.lore")));
     }
+
 }
