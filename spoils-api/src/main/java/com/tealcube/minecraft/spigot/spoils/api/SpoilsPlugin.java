@@ -25,24 +25,7 @@ import com.tealcube.minecraft.spigot.spoils.api.tiers.TierTraitRegistry;
 import org.bukkit.plugin.java.JavaPlugin;
 import se.ranzdo.bukkit.methodcommand.CommandHandler;
 
-import java.util.logging.Level;
-
 public abstract class SpoilsPlugin extends JavaPlugin {
-
-    /**
-     * Writes debug messages to the plugin's debug log using the given {@link java.util.logging.Level}.
-     *
-     * @param level    Level of logging
-     * @param messages messages to write
-     */
-    public abstract void debug(Level level, String... messages);
-
-    /**
-     * Writes debug messages to the plugin's debug log using {@link java.util.logging.Level#INFO}.
-     *
-     * @param messages messages to write
-     */
-    public abstract void debug(String... messages);
 
     /**
      * Gets and returns the MasterConfiguration for this instance.

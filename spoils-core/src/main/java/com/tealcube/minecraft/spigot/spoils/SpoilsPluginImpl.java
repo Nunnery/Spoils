@@ -14,6 +14,9 @@
  */
 package com.tealcube.minecraft.spigot.spoils;
 
+import ch.qos.logback.classic.LoggerContext;
+import ch.qos.logback.classic.joran.JoranConfigurator;
+import ch.qos.logback.core.joran.spi.JoranException;
 import com.tealcube.minecraft.bukkit.config.MasterConfiguration;
 import com.tealcube.minecraft.bukkit.config.SmartYamlConfiguration;
 import com.tealcube.minecraft.bukkit.config.VersionedSmartConfiguration;
@@ -41,13 +44,16 @@ import com.tealcube.minecraft.spigot.spoils.managers.TierManagerImpl;
 import com.tealcube.minecraft.spigot.spoils.names.ResourceTableImpl;
 import com.tealcube.minecraft.spigot.spoils.tiers.TierTraitRegistryImpl;
 import org.apache.commons.lang.StringUtils;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import se.ranzdo.bukkit.methodcommand.CommandHandler;
 
 import java.io.File;
 import java.util.Set;
-import java.util.logging.Level;
 
 public class SpoilsPluginImpl extends SpoilsPlugin {
+
+    private static Logger logger;
 
     private static SpoilsPlugin instance;
     private TierTraitRegistry tierTraitRegistry;
@@ -66,7 +72,7 @@ public class SpoilsPluginImpl extends SpoilsPlugin {
 
     @Override
     public void onDisable() {
-        debug("Disabling v" + getDescription().getVersion());
+        logger.info("Disabling v" + getDescription().getVersion());
         for (TierTrait trait : tierTraitRegistry.getRegisteredTraits()) {
             tierTraitRegistry.unregister(trait);
         }
@@ -78,6 +84,19 @@ public class SpoilsPluginImpl extends SpoilsPlugin {
         instance = this;
         debugger = new Debugger(new File(getDataFolder(), "debug.log"));
         tierTraitRegistry = new TierTraitRegistryImpl();
+
+        LoggerContext loggerContext = (LoggerContext) LoggerFactory.getILoggerFactory();
+        JoranConfigurator jc = new JoranConfigurator();
+        jc.setContext(loggerContext);
+        loggerContext.reset();
+        loggerContext.putProperty("baseplugindir", getDataFolder().getParent());
+        loggerContext.putProperty("plugindir", getDataFolder().getName());
+        try {
+            jc.doConfigure(getResource("logback.xml"));
+        } catch (JoranException e) {
+            e.printStackTrace();
+        }
+        logger = LoggerFactory.getLogger(SpoilsPlugin.class);
 
         settings = new MasterConfiguration();
         VersionedSmartYamlConfiguration configuration = new VersionedSmartYamlConfiguration
@@ -104,7 +123,7 @@ public class SpoilsPluginImpl extends SpoilsPlugin {
         for (ItemGroup ig : itemGroupSet) {
             getItemGroupManager().add(ig);
         }
-        debug("Loaded item groups: " + itemGroupSet.size());
+        logger.info("Loaded item groups: " + itemGroupSet.size());
 
         getServer().getScheduler().scheduleSyncDelayedTask(this, new Runnable() {
             @Override
@@ -113,25 +132,14 @@ public class SpoilsPluginImpl extends SpoilsPlugin {
                 for (Tier t : tierSet) {
                     getTierManager().add(t);
                 }
-                debug("Loaded tiers: " + tierSet.size());
+                logger.info("Loaded tiers: " + tierSet.size());
             }
         }, 20L);
 
         commandHandler = new CommandHandler(this);
         commandHandler.registerCommands(new SpoilsCommand(this));
 
-        debug("Enabling v" + getDescription().getVersion());
-    }
-
-    public void debug(Level level, String... messages) {
-        if (settings.getBoolean("config.debug")) {
-            debugger.debug(level, messages);
-        }
-    }
-
-    @Override
-    public void debug(String... messages) {
-        debug(Level.INFO, messages);
+        logger.info("Enabling v" + getDescription().getVersion());
     }
 
     @Override
@@ -178,19 +186,19 @@ public class SpoilsPluginImpl extends SpoilsPlugin {
         SmartTextFile file = new SmartTextFile(new File(getDataFolder(), "/resources/NamePartOne/generic.txt"));
         if (!file.exists()) {
             file.write(getResource("resources/NamePartOne/generic.txt"));
-            debug("Writing /resources/NamePartOne/generic.txt");
+            logger.info("Writing /resources/NamePartOne/generic.txt");
         }
         getResourceTable().setAvailableResources(ResourceType.PART_ONE, "generic", file.read());
         file = new SmartTextFile(new File(getDataFolder(), "/resources/NamePartTwo/generic.txt"));
         if (!file.exists()) {
             file.write(getResource("resources/NamePartTwo/generic.txt"));
-            debug("Writing /resources/NamePartTwo/generic.txt");
+            logger.info("Writing /resources/NamePartTwo/generic.txt");
         }
         getResourceTable().setAvailableResources(ResourceType.PART_TWO, "generic", file.read());
         file = new SmartTextFile(new File(getDataFolder(), "/resources/FlavorText/generic.txt"));
         if (!file.exists()) {
             file.write(getResource("resources/FlavorText/generic.txt"));
-            debug("Writing /resources/FlavorText/generic.txt");
+            logger.info("Writing /resources/FlavorText/generic.txt");
         }
         getResourceTable().setAvailableResources(ResourceType.FLAVOR_TEXT, "generic", file.read());
 
@@ -224,12 +232,12 @@ public class SpoilsPluginImpl extends SpoilsPlugin {
             }
         }
 
-        debug("Loaded primary name files: " + getResourceTable().getFileNames(ResourceType.PART_ONE).size(),
-                "Loaded primary names: " + getResourceTable().getAmountOfLoadedResources(ResourceType.PART_ONE),
-                "Loaded secondary name files: " + getResourceTable().getFileNames(ResourceType.PART_TWO).size(),
-                "Loaded secondary names: " + getResourceTable().getFileNames(ResourceType.PART_TWO).size(),
-                "Loaded flavor texts: " + getResourceTable().getAmountOfLoadedResources(ResourceType.FLAVOR_TEXT),
-                "Loaded flavor text files: " + getResourceTable().getFileNames(ResourceType.FLAVOR_TEXT).size());
+        logger.info("Loaded primary name files: " + getResourceTable().getFileNames(ResourceType.PART_ONE).size());
+        logger.info("Loaded primary names: " + getResourceTable().getAmountOfLoadedResources(ResourceType.PART_ONE));
+        logger.info("Loaded secondary name files: " + getResourceTable().getFileNames(ResourceType.PART_TWO).size());
+        logger.info("Loaded secondary names: " + getResourceTable().getFileNames(ResourceType.PART_TWO).size());
+        logger.info("Loaded flavor texts: " + getResourceTable().getAmountOfLoadedResources(ResourceType.FLAVOR_TEXT));
+        logger.info("Loaded flavor text files: " + getResourceTable().getFileNames(ResourceType.FLAVOR_TEXT).size());
     }
 
     @Override
