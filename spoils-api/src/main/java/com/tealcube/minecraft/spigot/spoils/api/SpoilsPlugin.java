@@ -27,6 +27,10 @@ import se.ranzdo.bukkit.methodcommand.CommandHandler;
 
 public abstract class SpoilsPlugin extends JavaPlugin {
 
+    protected static SpoilsPlugin instance;
+
+    public static SpoilsPlugin getInstance() { return instance; }
+
     /**
      * Gets and returns the MasterConfiguration for this instance.
      *

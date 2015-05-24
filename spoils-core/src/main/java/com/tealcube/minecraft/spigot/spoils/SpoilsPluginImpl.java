@@ -55,7 +55,6 @@ public class SpoilsPluginImpl extends SpoilsPlugin {
 
     private static Logger logger;
 
-    private static SpoilsPlugin instance;
     private TierTraitRegistry tierTraitRegistry;
     private Debugger debugger;
     private MasterConfiguration settings;
@@ -65,10 +64,6 @@ public class SpoilsPluginImpl extends SpoilsPlugin {
     private CommandHandler commandHandler;
     private boolean valid;
     private String invalidationReason;
-
-    public static SpoilsPlugin getInstance() {
-        return instance;
-    }
 
     @Override
     public void onDisable() {

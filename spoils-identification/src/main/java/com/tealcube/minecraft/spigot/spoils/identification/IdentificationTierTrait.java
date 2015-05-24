@@ -15,10 +15,16 @@
 package com.tealcube.minecraft.spigot.spoils.identification;
 
 import com.tealcube.minecraft.spigot.spoils.api.tiers.TierTrait;
+import org.bukkit.configuration.ConfigurationSection;
 
 public enum IdentificationTierTrait implements TierTrait {
 
-    IDENTIFICATION_CHANCE("identification-chance", Double.class, 0.0D);
+    IDENTIFICATION_CHANCE("identification-chance", Double.class, 0.0D) {
+        @Override
+        public Object load(ConfigurationSection baseSection) {
+            return baseSection.getDouble(key(), (Double) defaultValue());
+        }
+    };
 
     private final String key;
     private final Class valueClass;
