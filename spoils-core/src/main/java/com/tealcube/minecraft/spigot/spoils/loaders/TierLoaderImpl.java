@@ -15,7 +15,7 @@
 package com.tealcube.minecraft.spigot.spoils.loaders;
 
 import com.tealcube.minecraft.spigot.spoils.api.loaders.TierLoader;
-import com.tealcube.minecraft.spigot.spoils.api.tiers.StandardTierTrait;
+import com.tealcube.minecraft.spigot.spoils.tiers.StandardTierTrait;
 import com.tealcube.minecraft.spigot.spoils.api.tiers.Tier;
 import com.tealcube.minecraft.spigot.spoils.api.tiers.TierTrait;
 import com.tealcube.minecraft.spigot.spoils.tiers.TierImpl;

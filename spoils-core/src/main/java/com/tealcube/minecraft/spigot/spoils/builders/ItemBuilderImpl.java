@@ -21,7 +21,7 @@ import com.tealcube.minecraft.spigot.spoils.api.SpoilsPlugin;
 import com.tealcube.minecraft.spigot.spoils.api.builders.ItemBuilder;
 import com.tealcube.minecraft.spigot.spoils.api.items.ItemGroup;
 import com.tealcube.minecraft.spigot.spoils.api.names.ResourceType;
-import com.tealcube.minecraft.spigot.spoils.api.tiers.StandardTierTrait;
+import com.tealcube.minecraft.spigot.spoils.tiers.StandardTierTrait;
 import com.tealcube.minecraft.spigot.spoils.api.tiers.Tier;
 import com.tealcube.minecraft.spigot.spoils.common.math.SpoilsRandom;
 import com.tealcube.minecraft.spigot.spoils.common.utils.TextUtils;
