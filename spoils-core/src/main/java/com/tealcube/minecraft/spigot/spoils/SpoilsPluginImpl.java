@@ -35,7 +35,6 @@ import com.tealcube.minecraft.spigot.spoils.api.tiers.TierTrait;
 import com.tealcube.minecraft.spigot.spoils.api.tiers.TierTraitRegistry;
 import com.tealcube.minecraft.spigot.spoils.builders.ItemBuilderImpl;
 import com.tealcube.minecraft.spigot.spoils.commands.SpoilsCommand;
-import com.tealcube.minecraft.spigot.spoils.common.io.Debugger;
 import com.tealcube.minecraft.spigot.spoils.common.io.SmartTextFile;
 import com.tealcube.minecraft.spigot.spoils.loaders.ItemGroupLoaderImpl;
 import com.tealcube.minecraft.spigot.spoils.loaders.TierLoaderImpl;
@@ -56,7 +55,6 @@ public class SpoilsPluginImpl extends SpoilsPlugin {
     private static Logger logger;
 
     private TierTraitRegistry tierTraitRegistry;
-    private Debugger debugger;
     private MasterConfiguration settings;
     private TierManager tierManager;
     private ItemGroupManager itemGroupManager;
@@ -77,7 +75,6 @@ public class SpoilsPluginImpl extends SpoilsPlugin {
     public void onEnable() {
         valid = true;
         instance = this;
-        debugger = new Debugger(new File(getDataFolder(), "debug.log"));
         tierTraitRegistry = new TierTraitRegistryImpl();
 
         LoggerContext loggerContext = (LoggerContext) LoggerFactory.getILoggerFactory();
