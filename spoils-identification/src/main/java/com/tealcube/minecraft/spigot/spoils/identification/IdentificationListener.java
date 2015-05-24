@@ -15,7 +15,6 @@
 package com.tealcube.minecraft.spigot.spoils.identification;
 
 import com.tealcube.minecraft.bukkit.hilt.HiltItemStack;
-import com.tealcube.minecraft.bukkit.spoils.identification.SpoilsIdentification;
 import com.tealcube.minecraft.spigot.spoils.common.utils.MessageUtils;
 import com.tealcube.minecraft.spigot.spoils.common.utils.TextUtils;
 import org.bukkit.Material;
