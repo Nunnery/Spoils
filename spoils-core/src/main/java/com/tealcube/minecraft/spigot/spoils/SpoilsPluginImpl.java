@@ -226,7 +226,7 @@ public class SpoilsPluginImpl extends SpoilsPlugin {
         logger.info("Loaded primary name files: " + getResourceTable().getFileNames(ResourceType.PART_ONE).size());
         logger.info("Loaded primary names: " + getResourceTable().getAmountOfLoadedResources(ResourceType.PART_ONE));
         logger.info("Loaded secondary name files: " + getResourceTable().getFileNames(ResourceType.PART_TWO).size());
-        logger.info("Loaded secondary names: " + getResourceTable().getFileNames(ResourceType.PART_TWO).size());
+        logger.info("Loaded secondary names: " + getResourceTable().getAmountOfLoadedResources(ResourceType.PART_TWO));
         logger.info("Loaded flavor texts: " + getResourceTable().getAmountOfLoadedResources(ResourceType.FLAVOR_TEXT));
         logger.info("Loaded flavor text files: " + getResourceTable().getFileNames(ResourceType.FLAVOR_TEXT).size());
     }
