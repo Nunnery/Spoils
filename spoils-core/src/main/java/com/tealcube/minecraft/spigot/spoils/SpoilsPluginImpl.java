@@ -174,7 +174,6 @@ public class SpoilsPluginImpl extends SpoilsPlugin {
     }
 
     private void loadNames() {
-        getLogger().info("Loading names");
         SmartTextFile file = new SmartTextFile(new File(getDataFolder(), "/resources/NamePartOne/generic.txt"));
         if (!file.exists()) {
             file.write(getResource("resources/NamePartOne/generic.txt"));
