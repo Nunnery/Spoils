@@ -39,13 +39,13 @@ public enum StandardTierTrait implements TierTrait {
     PRIMARY_COLOR("primary-color", ChatColor.class, ChatColor.WHITE) {
         @Override
         public Object load(ConfigurationSection baseSection) {
-            return TextUtils.convertTag(baseSection.getString(key(), (String) defaultValue()));
+            return TextUtils.convertTag(baseSection.getString(key(), "<" + ((ChatColor)defaultValue()).name() + ">"));
         }
     },
     SECONDARY_COLOR("secondary-color", ChatColor.class, ChatColor.WHITE) {
         @Override
         public Object load(ConfigurationSection baseSection) {
-            return TextUtils.convertTag(baseSection.getString(key(), (String) defaultValue()));
+            return TextUtils.convertTag(baseSection.getString(key(), "<" + ((ChatColor)defaultValue()).name() + ">"));
         }
     },
     FLAVOR_TEXT("flavor-text", List.class, new ArrayList<String>()) {
