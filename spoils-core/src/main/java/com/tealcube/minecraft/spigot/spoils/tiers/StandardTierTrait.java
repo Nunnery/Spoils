@@ -1,5 +1,5 @@
 /*
- * This file is part of spoils-api, licensed under the ISC License.
+ * This file is part of spoils-core, licensed under the ISC License.
  *
  * Copyright (c) 2014-2015 Richard Harrah
  *
