@@ -131,7 +131,7 @@ public class SpoilsPluginImpl extends SpoilsPlugin {
         commandHandler = new CommandHandler(this);
         commandHandler.registerCommands(new SpoilsCommand(this));
 
-        logger.info("Enabling v" + getDescription().getVersion());
+        logger.info("Enabling " + getDescription().getName() + " v" + getDescription().getVersion());
     }
 
     @Override
