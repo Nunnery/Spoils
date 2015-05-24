@@ -14,6 +14,8 @@
  */
 package com.tealcube.minecraft.spigot.spoils.api.tiers;
 
+import org.bukkit.configuration.ConfigurationSection;
+
 public interface TierTrait {
 
     /**
@@ -36,5 +38,7 @@ public interface TierTrait {
      * @return default value
      */
     Object defaultValue();
+
+    Object load(ConfigurationSection baseSection);
 
 }
