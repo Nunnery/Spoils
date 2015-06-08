@@ -18,7 +18,7 @@
     <appender name="FILE" class="ch.qos.logback.core.rolling.RollingFileAppender">
         <file>plugin-logs/spoils-latest.log</file>
         <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
-            <fileNamePattern>plugin-logs/spoils-%d{yyyy-MM-dd}.log</fileNamePattern>
+            <fileNamePattern>plugin-logs/spoils-%d{yyyy-MM-dd}.log.gz</fileNamePattern>
             <maxHistory>10</maxHistory>
         </rollingPolicy>
         <append>true</append>
